@@ -1,0 +1,33 @@
+.nav {
+  display: flex;
+  height: 88px;
+  padding: 16px 21px 26px 21px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  background: #202020;
+  .navItem {
+    display: flex;
+    width: 50px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    .Icon {
+      display: flex;
+      width: 24px;
+      height: 24px;
+      justify-content: center;
+      align-items: center;
+    }
+    .text {
+      text-align: center;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+}
