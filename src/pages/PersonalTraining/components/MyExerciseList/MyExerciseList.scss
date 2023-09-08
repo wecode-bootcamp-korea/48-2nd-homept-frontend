@@ -1,0 +1,33 @@
+@import '/src/styles/variables.scss';
+
+.myExerciseList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 4px;
+
+  .myExerciseTitle {
+    @include subTitleText;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 25px 0 15px 0;
+  }
+
+  .myExerciseListContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

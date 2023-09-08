@@ -1,7 +1,7 @@
 import React from 'react';
 import './ContentTab.scss';
 
-const ContentTab = ({ selectedTab, handlerTab, CONTENT_TAP_DATA }) => {
+const ContentTab = ({ selectedTab, handlerTab, CONTENT_TAP_DATA, onClick }) => {
   return (
     <div className="contentTab">
       {CONTENT_TAP_DATA.map(item => (

@@ -6,7 +6,7 @@ body {
   height: 100%;
   overflow: hidden;
   box-sizing: border-box;
-  font-family: 'Pretendard-Regular';
+  font-family: 'Pretendard';
 }
 
 body {
@@ -20,7 +20,7 @@ body {
   width: 100%;
   min-width: 375px;
   padding-bottom: 88px;
-
+  overflow: auto;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
