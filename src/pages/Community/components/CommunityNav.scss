@@ -1,0 +1,15 @@
+@import '/src/styles/variables.scss';
+@import '/src/styles/common.scss';
+
+.CommunityNav {
+  display: flex;
+  width: 100%;
+  height: 56px;
+  padding: 19.5px 0px;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Pretendard-Regular';
+
+  font-size: 14px;
+  font-weight: 800;
+}
