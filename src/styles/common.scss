@@ -1,9 +1,26 @@
-:root {
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   box-sizing: border-box;
+  font-family: 'Pretendard-Regular';
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#root {
+  flex: 1;
+  width: 100%;
   max-width: 430px;
   min-width: 375px;
-  border: 1px solid black;
-  font-family: 'Pretendard-Regular';
+  padding-bottom: 88px;
 }
 
 @font-face {

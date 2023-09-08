@@ -13,6 +13,30 @@ const Nav = () => {
 
   const NAV_ITEMS = [
     {
+      url: '/community',
+      icon: <HiOutlineChatBubbleBottomCenterText className="Icon" />,
+      text: <div className="text">커뮤니티</div>,
+      onClick: '',
+    },
+    {
+      url: '/personal-training',
+      icon: <IoIosFitness className="Icon" />,
+      text: <div className="text">맞춤운동</div>,
+      onClick: '',
+    },
+    {
+      url: '/payment',
+      icon: <CiStar className="Icon" />,
+      text: <div className="text">멤버쉽</div>,
+      onClick: '',
+    },
+    {
+      url: '/mypage',
+      icon: <BsFillPersonFill className="Icon" />,
+      text: <div className="text">마이페이지</div>,
+      onClick: '',
+    },
+    {
       url: '/sign-in',
       icon: <IoSwapVerticalOutline className="Icon" />,
       text: (
@@ -30,38 +54,13 @@ const Nav = () => {
         }
       },
     },
-    {
-      url: '/community',
-      icon: <HiOutlineChatBubbleBottomCenterText className="Icon" />,
-      text: <div className="text">커뮤니티</div>,
-      onClick: '',
-    },
-
-    {
-      url: '/mypage',
-      icon: <BsFillPersonFill className="Icon" />,
-      text: <div className="text">마이페이지</div>,
-      onClick: '',
-    },
-    {
-      url: '/payment',
-      icon: <CiStar className="Icon" />,
-      text: <div className="text">멤버쉽</div>,
-      onClick: '',
-    },
-    {
-      url: '/personal-training',
-      icon: <IoIosFitness className="Icon" />,
-      text: <div className="text">맞춤운동</div>,
-      onClick: '',
-    },
   ];
 
   return (
     <div className="nav">
       {NAV_ITEMS.map(pathName => (
         <NavLink
-          key={pathName.text}
+          key={pathName.url}
           to={pathName.url}
           onClick={pathName.onClick}
           style={({ isActive }) => {
