@@ -1,0 +1,32 @@
+@import '/src/styles/variables.scss';
+
+.myDietList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .myDietTitle {
+    @include subTitleText;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 25px 0 15px 0;
+  }
+
+  .myDietListContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
