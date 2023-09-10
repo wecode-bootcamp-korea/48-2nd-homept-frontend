@@ -5,6 +5,7 @@ import SignUp from './pages/SignUp/SignUp';
 import Community from './pages/Community/Community';
 import Post from './pages/Community/Post';
 import MyPage from './pages/MyPage/MyPage';
+import MyPageEditing from './pages/MyPage/MyPageEditing';
 import Payment from './pages/Payment/Payment';
 import PersonalTraining from './pages/PersonalTraining/PersonalTraining';
 import PostDetail from './pages/Community/PostDetail';
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/community/postdetail/:id" element={<PostDetail />} />
 
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage-editing" element={<MyPageEditing />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/personal-training" element={<PersonalTraining />} />
       </Routes>
