@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "category": "자유",
+    "grade": "🥈",
+    "userName": "감자1",
+    "title": "제목",
+    "content": "형들 보충제 뭐 먹어야해?",
+    "image": "https://cdn.pixabay.com/photo/2015/01/10/17/32/physiotherapy-595529_1280.jpg",
+    "time": "34분전",
+    "comments": "댓글",
+    "buttonStyle": "free"
+  },
+  {
+    "id": 2,
+    "category": "코칭",
+    "grade": "🥇",
+    "userName": "고구마",
+    "title": "제목2",
+    "content": "어떤 프로그램이 좋을까요?",
+    "image": "https://cdn.pixabay.com/photo/2015/01/10/17/32/physiotherapy-595529_1280.jpg",
+    "time": "1시간전",
+    "comments": "댓글2",
+    "buttonStyle": "coaching"
+  },
+  {
+    "id": 3,
+    "category": "자유",
+    "grade": "🥉",
+    "userName": "구황작물",
+    "title": "제목3",
+    "content": "나는무료회원",
+    "image": "https://cdn.pixabay.com/photo/2015/01/10/17/32/physiotherapy-595529_1280.jpg",
+    "time": "1시간전",
+    "comments": "댓글2",
+    "buttonStyle": "free"
+  }
+]
