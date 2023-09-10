@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Post.scss';
 import PostNav from './components/PostNav';
 import ContentTab from '../../components/ContentTab/ContentTab';
@@ -6,6 +7,14 @@ import ContentTab from '../../components/ContentTab/ContentTab';
 const Post = () => {
   const [selectedTab, setSelectedTab] = useState(1);
   const handlerTab = num => setSelectedTab(num);
+
+  const navigate = useNavigate();
+  const handleAdd = () => {
+    navigate('/community/postdetail');
+  };
+  const handlecancel = () => {
+    navigate('/community/post');
+  };
 
   const CONTENT_TAP_DATA = [
     {
@@ -31,8 +40,12 @@ const Post = () => {
         <textarea className="textarea" />
       </div>
       <div className="buttonWrap">
-        <button className="cancel">취소</button>
-        <button className="add">게시</button>
+        <button onClick={handlecancel} className="cancel">
+          취소
+        </button>
+        <button onClick={handleAdd} className="add">
+          게시
+        </button>
       </div>
     </div>
   );
