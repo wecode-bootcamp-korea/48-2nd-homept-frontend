@@ -1,0 +1,10 @@
+{
+  "data": {
+    "user_id": 1,
+    "nickName": "집피티",
+    "member_grade_id": 2,
+    "height": 160,
+    "weight": 60,
+    "age": 28
+  }
+}
