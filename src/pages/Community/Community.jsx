@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Community.scss';
 import CommunityNav from './components/CommunityNav';
 import CommunityList from './components/CommunityList';
 import CommunityButton from './components/CommunityButton';
 import ContentTab from '../../components/ContentTab/ContentTab';
+import './Community.scss';
+
+const CONTENT_TAP_DATA = [
+  {
+    id: 1,
+    text: '전체',
+  },
+  { id: 2, text: '자유' },
+  {
+    id: 3,
+    text: '🎖️ 피트니스 코칭',
+  },
+];
 
 const Community = () => {
   const [communityData, setCommunityData] = useState([]);
@@ -17,23 +29,17 @@ const Community = () => {
     const userLevel = '🥇';
 
     if (userLevel === '🥇') {
-      navigate('/community/post');
+      if (selectedTab === 1) {
+        navigate('/community/post?tabId=1');
+      } else if (selectedTab === 2) {
+        navigate('/community/post?tabId=1');
+      } else if (selectedTab === 3) {
+        navigate('/community/post?tabId=2');
+      }
     } else if (userLevel === '🥈' || userLevel === '🥉') {
       navigate('/community/post-limited');
     }
   };
-
-  const CONTENT_TAP_DATA = [
-    {
-      id: 1,
-      text: '전체',
-    },
-    { id: 2, text: '자유' },
-    {
-      id: 3,
-      text: '🎖️ 피트니스 코칭',
-    },
-  ];
 
   useEffect(() => {
     const fetchData = () => {
@@ -64,7 +70,7 @@ const Community = () => {
       <ContentTab
         selectedTab={selectedTab}
         handlerTab={handlerTab}
-        CONTENT_TAP_DATA={CONTENT_TAP_DATA}
+        tabs={CONTENT_TAP_DATA}
       />
       <CommunityList filteredData={filteredData} />
       <CommunityButton onClick={handlePost} />
