@@ -34,5 +34,17 @@
     "time": "1시간전",
     "comments": "댓글2",
     "buttonStyle": "free"
+  },
+  {
+    "id": 4,
+    "category": "자유",
+    "grade": "🥇",
+    "userName": "호박",
+    "title": "제목4",
+    "content": "배고파요",
+    "image": "https://cdn.pixabay.com/photo/2015/01/10/17/32/physiotherapy-595529_1280.jpg",
+    "time": "1시간전",
+    "comments": "댓글2",
+    "buttonStyle": "free"
   }
 ]
