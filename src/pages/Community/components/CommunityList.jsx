@@ -14,7 +14,7 @@ const CommunityList = ({ filteredData }) => {
             >
               {item.category}
             </button>
-            <span className="userName">{`${item.grade} ${item.userName}`}</span>
+            <span className="userName">{item.userName}</span>
           </div>
           <div className="titleContainer">
             <div className="titleWrap">
