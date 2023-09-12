@@ -1,24 +1,24 @@
 import React from 'react';
 import './PostDetailBox.scss';
 
-const PostDetailBox = ({ post }) => {
+const PostDetailBox = () => {
   return (
     <div className="PostDetailBox">
       <div className="userBox">
-        <span className="userName">
-          {post.grade} {post.userName}
-        </span>
-        <button className={`button ${post.buttonStyle}`}>
-          {post.category}
-        </button>
+        <span className="userName">user</span>
+        <button className="button">자유</button>
       </div>
       <div className="textbox">
-        <div className="title">{post.title}</div>
-        <div className="text">{post.content}</div>
-        <img className="image" src={post.image} alt="Post Detail" />
+        <div className="title">제목임</div>
+        <div className="text">텍스트입니당</div>
+        <img
+          className="image"
+          src="https://cdn.pixabay.com/photo/2015/01/10/17/32/physiotherapy-595529_1280.jpg"
+          alt="Post Detail" // alt 속성 추가
+        />
         <div className="commentBox">
-          <span className="comment">{post.comments}</span>
-          <span className="time">{post.time}</span>
+          <span className="comment">댓글</span>
+          <span className="time">작성시간23.09.01</span>
         </div>
       </div>
     </div>

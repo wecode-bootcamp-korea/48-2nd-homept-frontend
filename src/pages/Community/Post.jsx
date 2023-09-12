@@ -13,7 +13,7 @@ const Post = () => {
     navigate('/community/postdetail');
   };
   const handlecancel = () => {
-    navigate('/community');
+    navigate('/community/post');
   };
 
   const CONTENT_TAP_DATA = [
