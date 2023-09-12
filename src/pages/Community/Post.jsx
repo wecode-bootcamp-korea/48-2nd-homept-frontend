@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import PostNav from './components/PostNav';
 import ContentTab from '../../components/ContentTab/ContentTab';
@@ -10,57 +10,40 @@ const Post = () => {
   const [selectedTab, setSelectedTab] = useState(tabId);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [communityData, setCommunityData] = useState([]);
 
   const handlerTab = num => setSelectedTab(num);
 
   const navigate = useNavigate();
+  const handleAdd = () => {
+    navigate(`/community/postdetail/:id`);
+  };
 
   // const handleAdd = () => {
-  //   navigate(`/community`);
+  //   fetch('', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       title,
+  //       content,
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       navigate(`/community/postdetail/${data.id}`);
+  //     });
   // };
-  useEffect(() => {
-    const fetchData = () => {
-      fetch('/data/communityData.json')
-        .then(response => response.json())
-        .then(data => setCommunityData(data))
-        .catch(error =>
-          console.error('데이터를 불러오는 데 실패했습니다.', error),
-        );
-    };
-
-    fetchData();
-  }, []);
-
-  const handleAdd = () => {
-    fetch('http://localhost:3000/community', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        // Authorization: localStorage.getItem('access_token'),
-      },
-      body: JSON.stringify({
-        title,
-        content,
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        setCommunityData(prevData => [data, ...prevData]);
-        navigate('/community');
-      });
-  };
 
   const handlecancel = () => {
     navigate('/community');
   };
-  const handleTitle = value => {
-    setTitle(value);
+  const handleTitle = e => {
+    setTitle(e.target.value);
   };
   console.log(title);
-
-  const handleContent = value => {
-    setContent(value);
+  const handleContent = e => {
+    setContent(e.target.value);
   };
   console.log(content);
 
@@ -86,15 +69,13 @@ const Post = () => {
       </div>
       <div className="inputWrap">
         <input
-          onChange={event => handleTitle(event.target.value)}
-          type="text"
+          onChange={handleTitle}
           value={title}
           className="input"
           placeholder="제목을 입력해주세요"
         />
         <textarea
-          onChange={event => handleContent(event.target.value)}
-          type="text"
+          onChange={handleContent}
           value={content}
           className="textarea"
           placeholder="게시글을 입력해주세요"
