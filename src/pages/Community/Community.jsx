@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './Community.scss';
 import CommunityNav from './components/CommunityNav';
 import CommunityList from './components/CommunityList';
@@ -9,17 +8,6 @@ import ContentTab from '../../components/ContentTab/ContentTab';
 const Community = () => {
   const [selectedTab, setSelectedTab] = useState(1);
   const handlerTab = num => setSelectedTab(num);
-  const navigate = useNavigate();
-
-  const handlePost = () => {
-    const userLevel = '🥇';
-
-    if (userLevel === '🥇') {
-      navigate('/community/post');
-    } else if (userLevel === '🥈' || userLevel === '🥉') {
-      navigate('/community/post-limited');
-    }
-  };
 
   const CONTENT_TAP_DATA = [
     {
@@ -58,18 +46,6 @@ const Community = () => {
       comments: '댓글2',
       buttonStyle: 'coaching',
     },
-    {
-      id: 3,
-      category: '자유',
-      userName: '🥉구황작물',
-      title: '제목3',
-      content: '나는무료회원',
-      image:
-        'https://cdn.pixabay.com/photo/2015/01/10/17/32/physiotherapy-595529_1280.jpg',
-      time: '1시간전',
-      comments: '댓글2',
-      buttonStyle: 'free',
-    },
   ];
 
   const filteredData = COMMUNITY_DATA.filter(item => {
@@ -77,10 +53,7 @@ const Community = () => {
       return true;
     }
     if (selectedTab === 2) {
-      return (
-        (item.userName.includes('🥈') || item.userName.includes('🥉')) &&
-        item.buttonStyle === 'free'
-      );
+      return item.userName.includes('🥈') && item.buttonStyle === 'free';
     }
     if (selectedTab === 3) {
       return item.userName.includes('🥇') && item.buttonStyle === 'coaching';
@@ -97,7 +70,7 @@ const Community = () => {
         CONTENT_TAP_DATA={CONTENT_TAP_DATA}
       />
       <CommunityList filteredData={filteredData} />
-      <CommunityButton onClick={handlePost} />
+      <CommunityButton />
     </div>
   );
 };
