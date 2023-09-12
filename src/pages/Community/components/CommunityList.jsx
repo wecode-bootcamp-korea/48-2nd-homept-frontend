@@ -1,22 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import './CommunityList.scss';
 
 const CommunityList = ({ filteredData }) => {
-  const navigate = useNavigate();
-
-  const handlePostDetail = id => {
-    navigate(`/community/postdetail/${id}`);
-  };
-
   return (
     <div className="CommunityList">
       {filteredData.map(item => (
-        <div
-          className="container"
-          key={item.id}
-          onClick={() => handlePostDetail(item.id)}
-        >
+        <div className="container" key={item.id}>
           <div className="buttonWrap">
             <button
               className={`button ${
