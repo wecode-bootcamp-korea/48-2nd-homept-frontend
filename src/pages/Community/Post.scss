@@ -23,28 +23,23 @@
   .inputWrap {
     display: flex;
     height: 450px;
+    margin: 18px;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    padding: 0 18px;
-    margin-bottom: 18px;
   }
   .input {
     width: 100%;
-    box-sizing: border-box;
     height: 30px;
     border: 1px solid #c7c7c7;
     border-radius: 9px;
-    padding: 10px;
   }
   .textarea {
     width: 100%;
-    box-sizing: border-box;
     height: 443px;
     resize: none;
     border: 1px solid #c7c7c7;
     border-radius: 9px;
-    padding: 10px;
   }
   .buttonWrap {
     display: flex;

@@ -1,10 +1,10 @@
 import React from 'react';
 import './ContentTab.scss';
 
-const ContentTab = ({ selectedTab, handlerTab, tabs }) => {
+const ContentTab = ({ selectedTab, handlerTab, CONTENT_TAP_DATA }) => {
   return (
     <div className="contentTab">
-      {tabs.map(item => (
+      {CONTENT_TAP_DATA.map(item => (
         <div
           className="tabItem"
           key={item.id}
