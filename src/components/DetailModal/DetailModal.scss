@@ -1,0 +1,38 @@
+@import '/src/styles/variables.scss';
+.modal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 300px;
+  padding: 40px;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  overflow-y: scroll;
+
+  .img {
+    border-radius: 15px;
+  }
+
+  .name {
+    @include subTitleText;
+    margin-top: 14px;
+  }
+
+  .content {
+    @include bodyTextS;
+    margin-top: 14px;
+  }
+
+  .closeIcon {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+  }
+}

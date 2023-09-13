@@ -41,15 +41,15 @@ const Nav = () => {
       icon: <IoSwapVerticalOutline className="Icon" />,
       text: (
         <div className="text">
-          {localStorage.getItem('TOKEN') ? '로그아웃' : '로그인'}
+          {localStorage.getItem('authorization') ? '로그아웃' : '로그인'}
         </div>
       ),
       onClick: () => {
-        if (localStorage.getItem('TOKEN')) {
-          localStorage.removeItem('TOKEN');
+        if (localStorage.getItem('authorization')) {
+          localStorage.removeItem('authorization');
           alert('로그아웃 되었습니다');
         }
-        if (!localStorage.getItem('TOKEN')) {
+        if (!localStorage.getItem('authorization')) {
           navigate('/sign-in');
         }
       },

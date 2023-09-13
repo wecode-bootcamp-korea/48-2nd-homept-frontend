@@ -1,10 +1,12 @@
 import React from 'react';
 import './ButtonM.scss';
 
-const ButtonM = ({ text, className, onClick }) => {
+const ButtonM = ({ firstText, secondText, className, onClick }) => {
   return (
     <button className={`buttonM ${className}`} onClick={onClick}>
-      {text}
+      {firstText}
+      <br />
+      {secondText}
     </button>
   );
 };

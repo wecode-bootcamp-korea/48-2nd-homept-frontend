@@ -1,15 +1,54 @@
 import React from 'react';
+import { BsCheckCircle, BsCheckCircleFill } from 'react-icons/bs';
 import './CheckBox.scss';
 
-const CheckBox = ({ name, imageUrl }) => (
-  <div className="checkBox">
-    <div className="imgBox">
-      <img src={`${imageUrl}`} className="exerciseImg" alt="exerciseIMG" />
+const CheckBox = ({
+  id,
+  type,
+  name,
+  imageUrl,
+  onClickTrainingBox,
+  checked,
+  setCheckBoxData,
+  checkedBox,
+}) => {
+  return (
+    <div className="checkBoxWrap ">
+      <div className="checkBox">
+        <div className="imgAndTextWrap" onClick={() => onClickTrainingBox(id)}>
+          <div className="imgBox">
+            {imageUrl ? (
+              <img
+                src={`${imageUrl}`}
+                className="exerciseImg"
+                alt="exerciseIMG"
+              />
+            ) : (
+              <img src="/images/fitness.PNG" alt="IMG" />
+            )}
+          </div>
+          <div className="textBox">
+            <div className="title">{name}</div>
+          </div>
+        </div>
+        {checked ? (
+          <BsCheckCircleFill
+            className="checkedOn"
+            onClick={() =>
+              setCheckBoxData({ ...checkedBox, checked: false, id, type })
+            }
+          />
+        ) : (
+          <BsCheckCircle
+            className="checkedOff"
+            onClick={() =>
+              setCheckBoxData({ ...checkedBox, checked: true, id, type })
+            }
+          />
+        )}
+      </div>
     </div>
-    <div className="textBox">
-      <div className="title">{name}</div>
-    </div>
-  </div>
-);
+  );
+};
 
 export default CheckBox;

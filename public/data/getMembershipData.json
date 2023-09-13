@@ -1,10 +1,9 @@
 {
   "data": [
     {
-      "name": "gold",
-      "start_date": "",
-      "end_date": "2023-09-10",
-      "length": 3
+      "membershipName": "gold",
+      "startDate": "2023-09-08",
+      "endDate": "2023-09-10"
     }
   ]
 }

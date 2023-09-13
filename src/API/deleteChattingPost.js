@@ -1,10 +1,9 @@
-const getTrainerProfile = async page => {
+const deleteChattingPost = async chattingData => {
   try {
     const response = await fetch(
-      `http://10.58.52.70:3000/trainers/list?limit=5&page=${page}`,
-      // '/data/trainerProfile.json',
+      `http://10.58.52.227:3000/consultant/posts/${chattingData[0].postId}`,
       {
-        method: 'GET',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           authorization: localStorage.getItem('authorization'),
@@ -19,4 +18,4 @@ const getTrainerProfile = async page => {
   }
 };
 
-export default getTrainerProfile;
+export default deleteChattingPost;

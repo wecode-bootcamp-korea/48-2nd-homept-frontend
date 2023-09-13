@@ -1,11 +1,18 @@
-.personalTrainingBox {
+.writeCounsel {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  height: auto;
-  padding: 7px 24px 130px 24px;
+  height: 100%;
+  background-color: #fdfdfd;
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .modalOverlay {

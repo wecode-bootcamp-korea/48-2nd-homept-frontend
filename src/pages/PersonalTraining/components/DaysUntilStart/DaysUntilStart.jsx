@@ -13,7 +13,11 @@ const DaysUntilStart = ({ startYearMonthDate, nowYearMonthDate }) => {
 
   return (
     <div className="daysUntilStart">
-      <img src="/images/fitness.PNG" className="daysUntilStartImage" />
+      <img
+        src="/images/fitness.PNG"
+        className="daysUntilStartImage"
+        alt="daysUntilStartImage"
+      />
       <div className="textWrap">
         <div className="daysUntilStartTitle">
           {getDateDiff(startYearMonthDate, nowYearMonthDate)}일 후 운동이

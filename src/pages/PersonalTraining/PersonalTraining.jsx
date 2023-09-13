@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { BeatLoader } from 'react-spinners';
 import ContentTab from '../../components/ContentTab/ContentTab';
 import ProfileListBox from './components/ProfileListBox/ProfileListBox';
 import PersonalTrainingBox from './components/PersonalTrainingBox/PersonalTrainingBox';
 import DaysUntilStart from './components/DaysUntilStart/DaysUntilStart';
 import SelectStartDate from './components/SelectStartDate/SelectStartDate';
+import getMyExerciseAndDiet from '../../API/getMyExerciseAndDiet';
+import CounselList from './CounselList';
+import getTrainerProfile from '../../API/getTrainerProfile';
 import './PersonalTraining.scss';
 import 'react-calendar/dist/Calendar.css';
 
 const PersonalTraining = () => {
   const [membershipData, setMembershipData] = useState({});
-  const startDate = new Date(`${membershipData[0]?.start_date}`);
-
+  const startDate = new Date(`${membershipData[0]?.startDate}`);
+  //TODO refactor
   const startYearMonthDate = new Date(
     startDate.getFullYear(),
     startDate.getMonth(),
@@ -28,27 +32,37 @@ const PersonalTraining = () => {
   const week = makeWeekArr(nowYearMonthDate);
   const [selectedDate, setSelectedDate] = useState(`${nowYearMonthDate}`);
   const [selectedTab, setSelectedTab] = useState(1);
-  const [trainerData, setTrainerData] = useState();
+  const [trainerData, setTrainerData] = useState([]);
   const [dateState, setDateState] = useState({
     date: nowYearMonthDate,
     week: week,
   });
-  const [checkedMyExercise, setCheckedSetMyExercise] = useState([]);
-  const [checkedMyDiet, setCheckedMyDiet] = useState([]);
   const [selectedButton, setSelectedButton] = useState();
+  const [loading, setLoading] = useState(false);
+  const [loadingImg, setLoadingImg] = useState(true);
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    if (!ptStartDate) {
-      setSelectedButton(true);
-    } else {
-      setSelectedButton(false);
-    }
-  }, [ptStartDate]);
+  const [trainingData, setTrainingData] = useState({
+    exercise: [],
+    diet: [],
+  });
+
+  const loadMore = () => {
+    setPage(prev => prev + 1);
+  };
+  const year = new Date(selectedDate).getFullYear().toString();
+  const month = (new Date(selectedDate).getMonth() + 1)
+    .toString()
+    .padStart(2, '0');
+  const day = new Date(selectedDate).getDate().toString();
+
+  const formattedDate = year + '-' + month + '-' + day;
+  const pageEnd = useRef();
 
   const handlerTab = num => {
     if (num === 2) {
-      if (localStorage.getItem('TOKEN')) {
-        if (membershipData[0]?.name === 'gold') {
+      if (localStorage.getItem('authorization')) {
+        if (membershipData[0]?.membershipName === 'gold') {
           setSelectedTab(num);
         } else {
           alert('멤버쉽 가입을 해주세요');
@@ -58,7 +72,7 @@ const PersonalTraining = () => {
       }
     }
     if (num === 3) {
-      if (localStorage.getItem('TOKEN') !== null) {
+      if (localStorage.getItem('authorization') !== null) {
         if (membershipData[0]?.length !== '') {
           setSelectedTab(num);
         } else {
@@ -73,39 +87,52 @@ const PersonalTraining = () => {
     }
   };
 
-  const getTrainerProfile = () => {
-    fetch('/data/trainerProfile.json', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json;charset=utf-8' },
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(data => {
-        return setTrainerData(data.data);
-      });
-  };
+  useEffect(() => {
+    const getData = async () => {
+      const { result } = await getMyExerciseAndDiet(formattedDate);
 
-  const getMembershipData = () => {
-    fetch('/data/getMembershipData.json', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json;charset=utf-8' },
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(data => {
-        setMembershipData(data.data);
-      });
-  };
+      setTrainingData({ exercise: result.exercise, diet: result.diet });
+      setMembershipData(result.membership);
+    };
+
+    getData();
+  }, [formattedDate]);
 
   useEffect(() => {
-    getTrainerProfile();
-  }, []);
+    const getData = async () => {
+      const { result } = await getTrainerProfile(page);
+      setTrainerData([...trainerData, ...result.data]);
+      setLoading(true);
+      if (result.data.length !== 0) {
+        setLoadingImg(true);
+      } else {
+        setLoadingImg(false);
+      }
+    };
+    getData();
+  }, [page]);
 
   useEffect(() => {
-    getMembershipData();
-  }, []);
+    if (!ptStartDate) {
+      setSelectedButton(true);
+    } else {
+      setSelectedButton(false);
+    }
+  }, [ptStartDate]);
+
+  useEffect(() => {
+    if (loading) {
+      const observer = new IntersectionObserver(
+        entries => {
+          if (entries[0].isIntersecting) {
+            loadMore();
+          }
+        },
+        { threshold: 1 },
+      );
+      observer.observe(pageEnd.current);
+    }
+  }, [loading]);
 
   return (
     <div className="personalTraining">
@@ -120,7 +147,11 @@ const PersonalTraining = () => {
       {selectedTab === 1 && (
         <div>
           <ProfileListBox trainerData={trainerData} />
-          <div className="placeHoler" />
+          {loadingImg && (
+            <div ref={pageEnd} className="loadingImg">
+              <BeatLoader color="#ff7a00" />
+            </div>
+          )}
         </div>
       )}
       {selectedTab === 2 &&
@@ -131,8 +162,11 @@ const PersonalTraining = () => {
             makeWeekArr={makeWeekArr}
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
+            formattedDate={formattedDate}
+            setTrainingData={setTrainingData}
+            trainingData={trainingData}
           />
-        ) : membershipData[0].start_date !== '' ? (
+        ) : membershipData[0].startDate !== null ? (
           <DaysUntilStart
             startYearMonthDate={startYearMonthDate}
             nowYearMonthDate={nowYearMonthDate}
@@ -144,8 +178,7 @@ const PersonalTraining = () => {
             selectedButton={selectedButton}
           />
         ))}
-
-      {selectedTab === 3 && <div>상담리스트</div>}
+      {selectedTab === 3 && <CounselList />}
     </div>
   );
 };

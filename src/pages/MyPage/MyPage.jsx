@@ -15,7 +15,7 @@ const MyPage = () => {
       method: 'GET',
       headers: {
         // 'Content-Type': 'application/json;charset=utf-8',
-        // authorization: localStorage.getItem('TOKEN'),
+        // authorization: localStorage.getItem('authorization'),
       },
     })
       .then(res => res.json())

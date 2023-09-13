@@ -1,6 +1,5 @@
 @import '/src/styles/variables.scss';
-
-.personalTraining {
+.checkBoxWrap {
   .checkBox {
     display: flex;
     align-items: center;
@@ -9,27 +8,33 @@
     width: 100%;
     background-color: #f4f4f4;
 
-    .imgBox {
+    .imgAndTextWrap {
       display: flex;
-      justify-content: center;
-      width: 80px;
-      height: 70px;
-      overflow: hidden;
-      border-radius: 16px 0 0 16px;
-
-      .exerciseImg {
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-
-    .textBox {
-      display: flex;
-      flex-direction: column;
-      flex: 1 0 0;
       align-items: center;
-      padding: 16px;
-      gap: 16px;
+      width: 100%;
+
+      .imgBox {
+        display: flex;
+        justify-content: center;
+        width: 80px;
+        height: 70px;
+        overflow: hidden;
+        border-radius: 16px 0 0 16px;
+
+        .exerciseImg {
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .textBox {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 0;
+        align-items: center;
+        padding: 16px;
+        gap: 16px;
+      }
 
       .title {
         align-items: flex-start;
@@ -42,6 +47,20 @@
         font-weight: 500;
         line-height: normal;
       }
+    }
+
+    .checkedOn {
+      width: 22px;
+      height: 22px;
+      color: $pointColor;
+      margin: 0 20px 0 10px;
+    }
+
+    .checkedOff {
+      width: 22px;
+      height: 22px;
+      color: rgb(136, 136, 136);
+      margin: 0 20px 0 10px;
     }
   }
 }
