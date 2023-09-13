@@ -10,6 +10,8 @@ import MyPageEditing from './pages/MyPage/MyPageEditing';
 import Payment from './pages/Payment/Payment';
 import PersonalTraining from './pages/PersonalTraining/PersonalTraining';
 import PostDetail from './pages/Community/PostDetail';
+import WriteCounsel from './pages/PersonalTraining/WriteCounsel';
+import ChattingPage from './pages/PersonalTraining/ChattingPage';
 
 const Router = () => {
   return (
@@ -25,6 +27,14 @@ const Router = () => {
         <Route path="/mypage-editing" element={<MyPageEditing />} />
         <Route path="/payment/:trainerId?" element={<Payment />} />
         <Route path="/personal-training" element={<PersonalTraining />} />
+        <Route
+          path="/personal-training/counsel/:id/:nickName/:emojiName"
+          element={<WriteCounsel />}
+        />
+        <Route
+          path="/personal-training/counsel/chatting/:id"
+          element={<ChattingPage />}
+        />
       </Routes>
       <Nav />
     </BrowserRouter>

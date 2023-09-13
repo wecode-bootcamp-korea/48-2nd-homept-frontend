@@ -33,6 +33,7 @@ const WeekCalendar = ({
 
     return Math.ceil((currentDate + firstDay) / 7);
   };
+
   return (
     <div className="weekCalendarBox">
       <div className="monthWeekText">

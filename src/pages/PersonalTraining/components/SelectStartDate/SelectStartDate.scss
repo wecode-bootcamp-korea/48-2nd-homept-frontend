@@ -54,4 +54,20 @@
       border-radius: 10px;
     }
   }
+  .seletedDateBox {
+    font-family: 'Pretendard';
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    width: 250px;
+    height: 40px;
+    border-radius: 12px;
+    margin-top: 23px;
+    color: white;
+    border: 1.5px solid $pointColor;
+    background-color: $pointColor;
+    gap: 8px;
+    flex-shrink: 0;
+  }
 }

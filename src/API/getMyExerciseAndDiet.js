@@ -1,8 +1,8 @@
-const getTrainerProfile = async page => {
+const getMyExerciseAndDiet = async formattedDate => {
   try {
     const response = await fetch(
-      `http://10.58.52.70:3000/trainers/list?limit=5&page=${page}`,
-      // '/data/trainerProfile.json',
+      // `http://10.58.52.178:3000/custom?userId=1&weekday=${formattedDate}`,
+      '/data/personalTrainingData.json',
       {
         method: 'GET',
         headers: {
@@ -11,6 +11,7 @@ const getTrainerProfile = async page => {
         },
       },
     );
+
     const result = await response.json();
     return { result };
   } catch (err) {
@@ -19,4 +20,4 @@ const getTrainerProfile = async page => {
   }
 };
 
-export default getTrainerProfile;
+export default getMyExerciseAndDiet;
