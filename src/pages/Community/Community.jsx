@@ -4,6 +4,7 @@ import CommunityNav from './components/CommunityNav';
 import CommunityList from './components/CommunityList';
 import CommunityWriteButton from './components/CommunityWriteButton';
 import ContentTab from '../../components/ContentTab/ContentTab';
+import { BASE_API_URL } from '../../config';
 import './Community.scss';
 
 const CONTENT_TAP_DATA = [
@@ -26,26 +27,34 @@ const Community = () => {
   const navigate = useNavigate();
 
   const handlePost = () => {
-    const userLevel = '🥇';
+    const authorization = localStorage.getItem('authorization');
 
-    if (userLevel === '🥇') {
-      if (selectedTab === 1) {
-        navigate('/community/post?tabId=1');
-      } else if (selectedTab === 2) {
-        navigate('/community/post?tabId=1');
-      } else if (selectedTab === 3) {
-        navigate('/community/post?tabId=2');
-      }
-    } else if (userLevel === '🥈' || userLevel === '🥉') {
-      navigate('/community/post-limited');
+    let mappedTabId = selectedTab;
+
+    if (selectedTab === 1 || selectedTab === 2) {
+      mappedTabId = 1;
+    } else if (selectedTab === 3) {
+      mappedTabId = 2;
+    }
+
+    if (!authorization) {
+      navigate('/sign-in');
+    } else {
+      navigate(`/community/post?tabId=${mappedTabId}`);
     }
   };
 
   useEffect(() => {
     const getCommunityData = () => {
-      fetch('/data/communityData.json')
+      // fetch('http://13.124.97.236:3000/community/posts/all', {
+      fetch(`${BASE_API_URL}/community/posts/all`, {
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          authorization: localStorage.getItem('authorization'),
+        },
+      })
         .then(response => response.json())
-        .then(data => setCommunityData(data));
+        .then(data => setCommunityData(data.data));
     };
 
     getCommunityData();
@@ -56,10 +65,10 @@ const Community = () => {
       return true;
     }
     if (selectedTab === 2) {
-      return item.buttonStyle === 'free';
+      return item.category === 1;
     }
     if (selectedTab === 3) {
-      return item.grade === '🥇' && item.buttonStyle === 'coaching';
+      return item.category === 2;
     }
     return false;
   });

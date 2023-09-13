@@ -2,53 +2,74 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import PostNav from './components/PostNav';
 import ContentTab from '../../components/ContentTab/ContentTab';
+import { BASE_API_URL } from '../../config';
 import './Post.scss';
 
 const Post = () => {
-  const [searchParams] = useSearchParams();
-  const tabId = Number(searchParams.get('tabId'));
-  const [selectedTab, setSelectedTab] = useState(tabId);
+  const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [nickname, setNickname] = useState('');
+  const [userGrade, setUserGrade] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [communityData, setCommunityData] = useState([]);
 
-  const handlerTab = num => setSelectedTab(num);
+  const tabId = Number(searchParams.get('tabId') || 1);
 
-  const navigate = useNavigate();
+  const handlerTab = id => {
+    searchParams.set('tabId', id);
+    setSearchParams(searchParams);
+  };
 
-  // const handleAdd = () => {
-  //   navigate(`/community`);
-  // };
   useEffect(() => {
-    const fetchData = () => {
-      fetch('/data/communityData.json')
+    const getPostUser = () => {
+      fetch(`${BASE_API_URL}/community/posts/all`, {
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          authorization: localStorage.getItem('authorization'),
+        },
+      })
         .then(response => response.json())
-        .then(data => setCommunityData(data))
+        .then(data => {
+          setNickname(data.nickname);
+          setUserGrade(data.memberGrades);
+        })
         .catch(error =>
           console.error('데이터를 불러오는 데 실패했습니다.', error),
         );
     };
 
-    fetchData();
+    getPostUser();
   }, []);
 
   const handlePostAdd = () => {
-    fetch('http://localhost:3000/community', {
+    const userId = 1;
+    // fetch('http://13.124.97.236:3000/community/posts/upload', {
+    fetch(`${BASE_API_URL}/community/posts/upload`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        // Authorization: localStorage.getItem('access_token'),
+        authorization: localStorage.getItem('authorization'),
       },
       body: JSON.stringify({
+        userId,
         title,
         content,
+        category: tabId,
       }),
     })
       .then(response => response.json())
       .then(data => {
-        setCommunityData(prevData => [data, ...prevData]);
-        navigate('/community');
-      });
+        if (data.message === 'error') {
+          console.error('Error:', data);
+
+          return;
+        }
+        setCommunityData(prevData => [data.thread, ...prevData]);
+        navigate(`/community/postdetail/${data.thread}`);
+      })
+      .catch(error => console.error('Error:', error));
   };
 
   const handlePostcancel = () => {
@@ -66,12 +87,14 @@ const Post = () => {
     <div className="Post">
       <PostNav text="글작성" />
       <ContentTab
-        selectedTab={selectedTab}
+        selectedTab={tabId}
         handlerTab={handlerTab}
         CONTENT_TAP_DATA={CONTENT_TAP_DATA}
       />
       <div className="textWrap">
-        <span className="user">🥇고구마</span>
+        <span className="user">
+          {userGrade} {nickname}
+        </span>
         <button className="button">사진추가</button>
       </div>
       <div className="inputWrap">
