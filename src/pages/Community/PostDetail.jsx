@@ -4,32 +4,52 @@ import PostNav from './components/PostNav';
 import PostDetailBox from './components/PostDetailBox';
 import PostUser from './components/PostUser';
 import PostTrainer from './components/PostTrainer';
+import { BASE_API_URL } from '../../config';
 import './PostDetail.scss';
 
 const PostDetail = () => {
-  const [communityData, setCommunityData] = useState([]);
-  const { id } = useParams();
+  const [postDetailData, setPostDetailData] = useState({});
+  const params = useParams();
+  const postId = params.id;
+
+  const getPostDetailData = () => {
+    // fetch(`http://13.124.97.236:3000/community/posts/${postId}`, {
+    fetch(`${BASE_API_URL}/community/posts/${postId}`, {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: localStorage.getItem('authorization'),
+      },
+    })
+      .then(response => response.json())
+      .then(result => {
+        setPostDetailData(result.data[0]);
+      });
+  };
 
   useEffect(() => {
-    fetch('/data/communityData.json')
-      .then(response => response.json())
-      .then(data => setCommunityData(data));
-  }, []);
-
-  const post = communityData.find(post => post.id === parseInt(id, 10));
+    getPostDetailData();
+  }, [postId]);
 
   return (
-    <div className="postDetail">
-      <div className="container">
-        <PostNav text="   " />
-        {post ? <PostDetailBox post={post} /> : <p>Loading...</p>}
-        {post && post.buttonStyle === 'coaching' ? (
-          <PostTrainer />
-        ) : (
-          <PostUser />
-        )}
+    <>
+      <PostNav text="" />
+      <div className="postDetail">
+        <div className="container">
+          <PostDetailBox postDetailData={postDetailData} />
+          {postDetailData?.category && (
+            <>
+              {postDetailData.category === 1 && (
+                <PostUser
+                  comments={postDetailData.comments}
+                  getPostDetailData={getPostDetailData}
+                />
+              )}
+              {postDetailData.category === 2 && <PostTrainer />}
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

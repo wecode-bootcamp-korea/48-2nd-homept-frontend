@@ -31,14 +31,15 @@
     align-items: center;
   }
 
+  .button.coaching {
+    color: #ff7a00;
+    background-color: white;
+    border: 1px solid #ff7a00;
+  }
+
   .button.free {
     color: #c7c7c7;
     border: 1px solid #c7c7c7;
-  }
-
-  .button.coaching {
-    color: #ff7a00;
-    border: 1px solid #ff7a00;
   }
 
   .userName {
@@ -58,6 +59,11 @@
 
   .content {
     @include bodyTextS;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
   }
 
   .image {
