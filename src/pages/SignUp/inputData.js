@@ -1,5 +1,5 @@
 const INPUT_DATA = {
-  nickName: {
+  nickname: {
     className: 'nickname',
     infoName: '닉네임',
     type: 'text',
@@ -8,7 +8,7 @@ const INPUT_DATA = {
   physicalInfo: [
     {
       id: 1,
-      className: 'tall',
+      className: 'height',
       infoName: '키',
       type: 'number',
       placeholder: '160',

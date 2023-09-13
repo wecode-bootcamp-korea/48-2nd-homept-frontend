@@ -1,7 +1,15 @@
 import React from 'react';
+import './Input.scss';
 
-function Input({ type, placeholder }) {
-  return <input type={type} placeholder={placeholder} />;
+function Input({ name, type, placeholder, getFucntion }) {
+  return (
+    <input
+      name={name}
+      type={type}
+      placeholder={placeholder}
+      onChange={getFucntion}
+    />
+  );
 }
 
 export default Input;

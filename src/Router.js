@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import SignIn from './pages/SignIn/SignIn';
+import Oath from './pages/SignIn/Oath';
 import SignUp from './pages/SignUp/SignUp';
 import Community from './pages/Community/Community';
 import Post from './pages/Community/Post';
@@ -15,11 +16,11 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/users/kakao-sign-in" element={<Oath />} />
+        <Route path="/users/kakao-sign-up" element={<SignUp />} />
         <Route path="/community" element={<Community />} />
         <Route path="/community/post" element={<Post />} />
         <Route path="/community/postdetail/:id" element={<PostDetail />} />
-
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage-editing" element={<MyPageEditing />} />
         <Route path="/payment" element={<Payment />} />

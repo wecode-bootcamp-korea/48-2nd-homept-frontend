@@ -2,42 +2,67 @@
 
 $nonActiveColor: #ebebeb;
 
-.btnSubmitWrap {
-  width: 100%;
-
-  button {
+.signUpWrap {
+  .btnSubmitWrap {
     width: 100%;
 
-    display: flex;
-    padding: 16px 12px;
-    justify-content: center;
-    align-items: center;
-    border: 0;
-    border-radius: 12px;
+    button {
+      width: 100%;
 
-    background-color: $nonActiveColor;
-    color: gray;
+      display: flex;
+      padding: 16px 12px;
+      justify-content: center;
+      align-items: center;
+      border: 0;
+      border-radius: 12px;
 
-    @include buttonText;
+      background-color: $titleColor;
+      color: white;
 
-    cursor: pointer;
+      @include buttonText;
+
+      cursor: pointer;
+
+      &:disabled {
+        background-color: rgb(226, 226, 226);
+        color: #949294;
+      }
+    }
   }
-}
 
-.btnDoubleCheckWrap {
-  button {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 16px 12px;
-    border: 0;
-    border-radius: 12px;
+  .btnDoubleCheckWrap {
+    button {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 16px 12px;
+      border: 0;
+      border-radius: 12px;
 
-    background-color: rgb(218, 218, 218);
-    color: gray;
+      background-color: rgb(218, 218, 218);
+      color: gray;
 
-    @include buttonText;
+      @include buttonText;
 
-    cursor: pointer;
+      cursor: pointer;
+    }
+  }
+
+  .checked {
+    button {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 16px 12px;
+      border: 0;
+      border-radius: 12px;
+
+      background-color: $pointColor;
+      color: white;
+
+      @include buttonText;
+
+      cursor: pointer;
+    }
   }
 }
