@@ -70,7 +70,7 @@ const Community = () => {
       <ContentTab
         selectedTab={selectedTab}
         handlerTab={handlerTab}
-        tabs={CONTENT_TAP_DATA}
+        CONTENT_TAP_DATA={CONTENT_TAP_DATA}
       />
       <CommunityList filteredData={filteredData} />
       <CommunityWriteButton onClick={handlePost} />

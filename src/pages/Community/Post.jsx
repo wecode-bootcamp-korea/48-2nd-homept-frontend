@@ -68,7 +68,7 @@ const Post = () => {
       <ContentTab
         selectedTab={selectedTab}
         handlerTab={handlerTab}
-        tabs={CONTENT_TAP_DATA}
+        CONTENT_TAP_DATA={CONTENT_TAP_DATA}
       />
       <div className="textWrap">
         <span className="user">🥇고구마</span>
