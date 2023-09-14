@@ -23,7 +23,7 @@ const Router = () => {
         <Route path="/community/postdetail/:id" element={<PostDetail />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage-editing" element={<MyPageEditing />} />
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment/:trainerId?" element={<Payment />} />
         <Route path="/personal-training" element={<PersonalTraining />} />
       </Routes>
       <Nav />
