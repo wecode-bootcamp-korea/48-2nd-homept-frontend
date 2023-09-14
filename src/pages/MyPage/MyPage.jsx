@@ -2,25 +2,35 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from './components/Button/Button';
 import Info from './components/Info/Info';
-import { INPUT_DATA, BUTTON_DATA } from './inputData.js';
+import { INPUT_DATA } from './inputData.js';
 import './MyPage.scss';
 
 const MyPage = () => {
-  const [userInfo, setUserInfo] = useState({});
-  const goToMyPageEditing = useNavigate('/mypage-editing');
+  const apiUrl = process.env.REACT_APP_API_URL;
   const physicalInfoData = INPUT_DATA.physicalInfo;
+  const [userInfo, setUserInfo] = useState({});
+
+  const navigate = useNavigate();
+
+  const goToMyPageEditing = () => {
+    navigate('/mypage-editing');
+  };
 
   const getUserInfo = () => {
-    fetch('/data/userData.json', {
-      method: 'GET',
-      headers: {
-        // 'Content-Type': 'application/json;charset=utf-8',
-        // authorization: localStorage.getItem('authorization'),
+    fetch(
+      `${apiUrl}/users/mypage`,
+      // '/data/userData.json',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          authorization: localStorage.getItem('authorization'),
+        },
       },
-    })
+    )
       .then(res => res.json())
       .then(result => {
-        setUserInfo(result.data);
+        setUserInfo(result.myPageData);
       });
   };
 
@@ -32,8 +42,8 @@ const MyPage = () => {
     <div className="myPageContainer">
       <div className="userInfoContainer">
         <div className="infoNickName">
-          <span>🥇</span>
-          <span>NickName</span>
+          <span>{userInfo.emoji}</span>
+          <span>{userInfo.nickname}</span>
         </div>
 
         <div className="infoList">
