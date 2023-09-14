@@ -19,7 +19,7 @@
 
 .paymentWrap {
   width: 100%;
-  height: 100%;
+  height: auto;
 
   display: flex;
   flex-direction: column;
@@ -29,6 +29,7 @@
   .paymentContainer {
     width: 327px;
     height: 100%;
+    margin: 48px 0;
 
     display: flex;
     flex-direction: column;
@@ -82,6 +83,16 @@
           width: 10px;
           height: 10px;
         }
+      }
+    }
+
+    .selectedTrainer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+        @include infoTitleText;
       }
     }
   }

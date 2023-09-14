@@ -45,6 +45,7 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
+      flex: 2;
 
       span:first-child {
         @include subTitleText;
@@ -60,6 +61,7 @@
       display: flex;
       align-items: flex-end;
       flex-direction: column;
+      flex: 1;
 
       span:first-child {
         @include subTitleText;
