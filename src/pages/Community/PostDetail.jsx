@@ -44,7 +44,12 @@ const PostDetail = () => {
                   getPostDetailData={getPostDetailData}
                 />
               )}
-              {postDetailData.category === 2 && <PostTrainer />}
+              {postDetailData.category === 2 && (
+                <PostTrainer
+                  trainerComments={postDetailData.comments}
+                  getPostDetailData={getPostDetailData}
+                />
+              )}
             </>
           )}
         </div>

@@ -7,33 +7,59 @@ import './Post.scss';
 
 const Post = () => {
   const navigate = useNavigate();
-
+  const [selectedFile, setSelectedFile] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [nickname, setNickname] = useState('');
   const [userGrade, setUserGrade] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [communityData, setCommunityData] = useState([]);
-
   const tabId = Number(searchParams.get('tabId') || 1);
+  const [previewSrc, setPreviewSrc] = useState(null);
+
+  const getMedalEmoji = name => {
+    switch (name) {
+      case 'gold':
+        return '🥇';
+      case 'silver':
+        return '🥈';
+      case 'bronze':
+        return '🥉';
+      default:
+        return '비회원';
+    }
+  };
 
   const handlerTab = id => {
+    // if (userGrade === 'bronze' && id === 2) {
+    //   const isConfirmed = window.confirm(
+    //     '코칭을 받고 싶으시면 결제부터 하십시오. 결제 페이지로 이동하시겠습니까?',
+    //   );
+    //   if (isConfirmed) {
+    //     navigate('/payment');
+    //     return;
+    //   } else {
+    //     return;
+    //   }
+    // }
     searchParams.set('tabId', id);
     setSearchParams(searchParams);
   };
 
   useEffect(() => {
     const getPostUser = () => {
-      fetch(`${BASE_API_URL}/community/posts/all`, {
+      // fetch('http://13.124.97.236:3000/users/mypage', {
+      fetch(`${BASE_API_URL}/users/mypage`, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           authorization: localStorage.getItem('authorization'),
         },
       })
-        .then(response => response.json())
-        .then(data => {
-          setNickname(data.nickname);
-          setUserGrade(data.memberGrades);
+        .then(res => res.json())
+        .then(result => {
+          setNickname(result.myPageData.nickname);
+          setUserGrade(result.myPageData.grade);
         })
         .catch(error =>
           console.error('데이터를 불러오는 데 실패했습니다.', error),
@@ -43,44 +69,36 @@ const Post = () => {
     getPostUser();
   }, []);
 
+  const handleFileChange = e => {
+    setSelectedFile(e.target.files[0]);
+    setPreviewSrc(URL.createObjectURL(e.target.files[0]));
+  };
+
   const handlePostAdd = () => {
-    const userId = 1;
-    // fetch('http://13.124.97.236:3000/community/posts/upload', {
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('category', tabId);
+    if (selectedFile) {
+      formData.append('selectedFile', selectedFile);
+    }
     fetch(`${BASE_API_URL}/community/posts/upload`, {
+      // fetch('http://13.124.97.236:3000/community/posts/upload', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: localStorage.getItem('authorization'),
+        Authorization: localStorage.getItem('authorization'),
       },
-      body: JSON.stringify({
-        userId,
-        title,
-        content,
-        category: tabId,
-      }),
+      body: formData,
     })
       .then(response => response.json())
       .then(data => {
-        if (data.message === 'error') {
-          console.error('Error:', data);
-
-          return;
-        }
-        setCommunityData(prevData => [data.thread, ...prevData]);
-        navigate(`/community/postdetail/${data.thread}`);
-      })
-      .catch(error => console.error('Error:', error));
+        setCommunityData(prevData => [data, ...prevData]);
+        navigate(`/community/postdetail/${data.id}`);
+        console.log(data.id);
+      });
   };
-
   const handlePostcancel = () => {
     navigate('/community');
-  };
-  const handleTitle = value => {
-    setTitle(value);
-  };
-
-  const handleContent = value => {
-    setContent(value);
   };
 
   return (
@@ -93,21 +111,33 @@ const Post = () => {
       />
       <div className="textWrap">
         <span className="user">
-          {userGrade} {nickname}
+          {getMedalEmoji(userGrade)} {nickname}
         </span>
-        <button className="button">사진추가</button>
+        <div className="previewWrap">
+          {previewSrc && (
+            <img src={previewSrc} alt="preview" className="previewImage" />
+          )}
+          <label className="customFileInput">
+            사진 추가
+            <input
+              type="file"
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
+          </label>
+        </div>
       </div>
       <div className="inputWrap">
         <input
-          onChange={event => handleTitle(event.target.value)}
+          onChange={event => setTitle(event.target.value)}
           type="text"
           value={title}
           className="input"
           placeholder="제목을 입력해주세요"
         />
         <textarea
-          onChange={event => handleContent(event.target.value)}
-          type="text"
+          onChange={event => setContent(event.target.value)}
+          type="textarea"
           value={content}
           className="textarea"
           placeholder="게시글을 입력해주세요"
@@ -124,9 +154,7 @@ const Post = () => {
     </div>
   );
 };
-
 export default Post;
-
 const CONTENT_TAP_DATA = [
   {
     id: 1,

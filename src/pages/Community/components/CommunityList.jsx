@@ -1,8 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BASE_API_URL } from '../../../config';
 import './CommunityList.scss';
 
-const CommunityList = ({ filteredData }) => {
+const CommunityList = ({
+  filteredData,
+  currentPage,
+  handleNextPage,
+  handlePrevPage,
+}) => {
   const getMedalEmoji = name => {
     switch (name) {
       case 'gold':
@@ -15,6 +21,11 @@ const CommunityList = ({ filteredData }) => {
         return '비회원';
     }
   };
+  const itemsPerPage = 7;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
   const getCategoryLabel = category => {
     switch (category) {
       case 1:
@@ -27,31 +38,54 @@ const CommunityList = ({ filteredData }) => {
   };
   const navigate = useNavigate();
 
-  const handlePostDetail = (id, category, memberGrades) => {
+  const handlePostDetail = (id, category) => {
     const authorization = localStorage.getItem('authorization');
 
     if (!authorization) {
-      navigate('/sign-in');
+      const proceedToSignIn = window.confirm(
+        '로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?',
+      );
+
+      if (proceedToSignIn) {
+        navigate('/sign-in');
+      }
       return;
     }
 
-    if (memberGrades === 'bronze' && category === 2) {
-      navigate('/payment');
-      return;
-    } else {
-      navigate(`/community/postdetail/${id}`);
-    }
+    // fetch('http://13.124.97.236:3000/users/mypage', {
+    fetch(`${BASE_API_URL}/users/mypage`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: localStorage.getItem('authorization'),
+      },
+    })
+      .then(res => res.json())
+      .then(result => {
+        const myGrade = result.myPageData?.grade;
+
+        if (myGrade === 'bronze' && category === 2) {
+          const isConfirmed = window.confirm(
+            '해당 게시물을 보려면 결제가 필요합니다. 결제 페이지로 이동하시겠습니까?',
+          );
+
+          if (isConfirmed) {
+            navigate('/payment');
+          }
+          return;
+        } else {
+          navigate(`/community/postdetail/${id}`);
+        }
+      });
   };
 
   return (
     <div className="CommunityList">
-      {filteredData.map(item => (
+      {currentItems.map(item => (
         <div
           className="container"
           key={item.threadId}
-          onClick={() =>
-            handlePostDetail(item.threadId, item.category, item.memberGrades)
-          }
+          onClick={() => handlePostDetail(item.threadId, item.category)}
         >
           <div className="buttonWrap">
             <button
@@ -68,7 +102,9 @@ const CommunityList = ({ filteredData }) => {
               <div className="title">{item.title}</div>
               <div className="content">{item.content}</div>
             </div>
-            <img className="image" src={item.imageUrl} alt="이미지" />
+            {item.imageUrl && (
+              <img className="image" src={item.imageUrl} alt="이미지" />
+            )}
           </div>
           <div className="comment">
             <span>{item.time}</span>

@@ -25,7 +25,7 @@ const Oath = () => {
       .then(result => {
         if (
           result.message ===
-            'BASIC REGISTRAION SUCCESSFUL. NEED ADDITIONAL INFORMATION' ||
+            'BASIC REGISTRATION SUCCESSFUL. NEED ADDITIONAL INFORMATION' ||
           result.message === 'NEED ADDITIONAL INFORMATION'
         ) {
           alert('추가정보 입력이 필요합니다!');
