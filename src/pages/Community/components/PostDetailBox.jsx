@@ -3,6 +3,9 @@ import './PostDetailBox.scss';
 
 const PostDetailBox = ({ postDetailData }) => {
   const getMedalEmoji = name => {
+    if (!name) {
+      return '비회원';
+    }
     switch (name) {
       case 'gold':
         return '🥇';
@@ -42,7 +45,9 @@ const PostDetailBox = ({ postDetailData }) => {
       <div className="textbox">
         <div className="title">{postDetailData.title}</div>
         <div className="text">{postDetailData.content}</div>
-        <img className="image" src={postDetailData.imageUrl} alt="Detail" />
+        {postDetailData.imageUrl && (
+          <img className="image" src={postDetailData.imageUrl} alt="Detail" />
+        )}
         <div className="commentBox">
           <span className="comment">
             {postDetailData.comments?.length

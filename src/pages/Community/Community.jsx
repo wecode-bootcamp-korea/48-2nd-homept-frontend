@@ -4,6 +4,7 @@ import CommunityNav from './components/CommunityNav';
 import CommunityList from './components/CommunityList';
 import CommunityWriteButton from './components/CommunityWriteButton';
 import ContentTab from '../../components/ContentTab/ContentTab';
+import CommunityPagination from './components/CommunityPagination';
 import { BASE_API_URL } from '../../config';
 import './Community.scss';
 
@@ -22,6 +23,7 @@ const CONTENT_TAP_DATA = [
 const Community = () => {
   const [communityData, setCommunityData] = useState([]);
   const [selectedTab, setSelectedTab] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handlerTab = num => setSelectedTab(num);
   const navigate = useNavigate();
@@ -38,10 +40,43 @@ const Community = () => {
     }
 
     if (!authorization) {
-      navigate('/sign-in');
-    } else {
-      navigate(`/community/post?tabId=${mappedTabId}`);
+      const proceedToSignIn = window.confirm(
+        '로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?',
+      );
+
+      if (proceedToSignIn) {
+        navigate('/sign-in');
+      }
+      return;
     }
+    // fetch('http://13.124.97.236:3000/users/mypage', {
+    fetch(`${BASE_API_URL}/users/mypage`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: localStorage.getItem('authorization'),
+      },
+    })
+      .then(res => res.json())
+      .then(result => {
+        const myGrade = result.myPageData?.grade;
+
+        if (myGrade === 'bronze' && mappedTabId === 2) {
+          const isConfirmed = window.confirm(
+            '해당 게시물을 보려면 결제가 필요합니다. 결제 페이지로 이동하시겠습니까?',
+          );
+
+          if (isConfirmed) {
+            navigate('/payment');
+          }
+          return;
+        } else {
+          navigate(`/community/post?tabId=${mappedTabId}`);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching user grade:', error);
+      });
   };
 
   useEffect(() => {
@@ -62,7 +97,7 @@ const Community = () => {
 
   const filteredData = communityData.filter(item => {
     if (selectedTab === 1) {
-      return true;
+      return item.category === 1 || item.category === 2;
     }
     if (selectedTab === 2) {
       return item.category === 1;
@@ -73,6 +108,21 @@ const Community = () => {
     return false;
   });
 
+  const itemsPerPage = 10;
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(prevPage => prevPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+    }
+  };
+
   return (
     <div>
       <CommunityNav />
@@ -81,7 +131,17 @@ const Community = () => {
         handlerTab={handlerTab}
         CONTENT_TAP_DATA={CONTENT_TAP_DATA}
       />
-      <CommunityList filteredData={filteredData} />
+
+      <CommunityList
+        filteredData={filteredData}
+        currentPage={currentPage}
+        handleNextPage={handleNextPage}
+        handlePrevPage={handlePrevPage}
+      />
+      <CommunityPagination
+        handlePrevPage={handlePrevPage}
+        handleNextPage={handleNextPage}
+      />
       <CommunityWriteButton onClick={handlePost} />
     </div>
   );

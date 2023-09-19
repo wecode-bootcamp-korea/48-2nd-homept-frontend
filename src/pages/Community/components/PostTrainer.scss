@@ -7,8 +7,11 @@
     font-style: normal;
     font-weight: 700;
     margin: 16px 0;
+    gap: 10px;
   }
-
+  .commentWrap {
+    gap: 10px;
+  }
   .commentBox {
     display: flex;
     justify-content: space-between;
@@ -33,5 +36,6 @@
     font-style: normal;
     font-weight: 400;
     color: #71727a;
+    margin-bottom: 10px;
   }
 }
