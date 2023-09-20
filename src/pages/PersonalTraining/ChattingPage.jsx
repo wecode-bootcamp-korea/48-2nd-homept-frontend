@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import WriteHeader from './components/WriteHeader/WriteHeader';
 import InputWrap from './components/InputWrap/InputWrap';
 import MenuModal from './components/MenuModal/MenuModal';
-import deleteChattingPost from '../../API/deleteChattingPost';
-import postComment from '../../API/postComment';
+import deleteChattingPost from '../../API/personalTrainingAPI/deleteChattingPost';
+import getChattingData from '../../API/personalTrainingAPI/getChattingData';
+import postComment from '../../API/personalTrainingAPI/postComment';
 import './ChattingPage.scss';
 
 const ChattingPage = () => {
@@ -14,38 +15,31 @@ const ChattingPage = () => {
   const [chattingData, setChattingData] = useState([]);
   const [clickedMenu, setClickedMenu] = useState(false);
 
-  const onClickSend = () => {
-    postComment(comment, chattingData);
+  const onClickCommentSend = async () => {
+    const getData = async () => {
+      await postComment(comment, chattingData);
+    };
+    await getData();
+    getChattingData(trainerId);
   };
 
   const handleComment = value => {
     setComment(value);
   };
+
   const handleOnKeyPress = e => {
     if (e.key === 'Enter') {
-      onClickSend();
+      onClickCommentSend();
     }
   };
 
-  const getChattingData = () => {
-    fetch(
-      // '/data/chattingPage.json',
-      `http://10.58.52.222:3000/consultant/posts/${trainerId}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          authorization: localStorage.getItem('authorization'),
-        },
-      },
-    )
-      .then(res => res.json())
-      .then(data => {
-        setChattingData(data.data);
-      });
-  };
-
-  useEffect(() => getChattingData(), []);
+  useEffect(() => {
+    const getData = async () => {
+      const { result } = await getChattingData(trainerId);
+      setChattingData(result.data);
+    };
+    getData();
+  }, []);
 
   return (
     <div className="conversationContainer">
@@ -60,9 +54,9 @@ const ChattingPage = () => {
       <div className="counselConversationBox scroll">
         {chattingData?.map(chat => (
           <ChatBox
-            key={chat.postId}
+            key={chat.threadId}
             emojiName={chat.userEmojiName}
-            nickName={chat.userNickName}
+            nickName={chat.userNickname}
             chattingData={chat.content}
             createdAt={chat.createdAt}
           />
@@ -71,9 +65,9 @@ const ChattingPage = () => {
           <ChatBox
             key={comment.commentId}
             emojiName={comment.emojiName}
-            nickName={comment.nickName}
-            chattingData={comment.comment}
-            createdAt={comment.createdAt}
+            nickName={comment.nickname}
+            chattingData={comment.content}
+            createdAt={comment.commentAt}
             id={comment.commentId}
           />
         ))}
@@ -89,7 +83,7 @@ const ChattingPage = () => {
       <InputWrap
         handleContent={handleComment}
         content={comment}
-        onClickSend={onClickSend}
+        onClickSend={onClickCommentSend}
         handleOnKeyPress={handleOnKeyPress}
       />
     </div>
@@ -111,7 +105,6 @@ const ChatBox = ({
         <div className="emojiName">
           {emojiName === 'gold' && '🥇'}
           {emojiName === 'silver' && '🥈'}
-          {emojiName === 'bronze' && '🥉'}
           {emojiName === 'bronze' && '🥉'}
           {emojiName === 'trainer' && '💪'}
           {emojiName === 'ironman' && '🦾'}

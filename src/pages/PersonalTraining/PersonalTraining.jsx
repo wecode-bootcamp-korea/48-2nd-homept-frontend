@@ -5,13 +5,14 @@ import ProfileListBox from './components/ProfileListBox/ProfileListBox';
 import PersonalTrainingBox from './components/PersonalTrainingBox/PersonalTrainingBox';
 import DaysUntilStart from './components/DaysUntilStart/DaysUntilStart';
 import SelectStartDate from './components/SelectStartDate/SelectStartDate';
-import getMyExerciseAndDiet from '../../API/getMyExerciseAndDiet';
+import getMyExerciseAndDiet from '../../API/personalTrainingAPI/getMyExerciseAndDiet';
 import CounselList from './CounselList';
-import getTrainerProfile from '../../API/getTrainerProfile';
+import getTrainerProfile from '../../API/personalTrainingAPI/getTrainerProfile';
 import './PersonalTraining.scss';
 import 'react-calendar/dist/Calendar.css';
 
 const PersonalTraining = () => {
+  const pageEnd = useRef();
   const [membershipData, setMembershipData] = useState({});
   const startDate = new Date(`${membershipData[0]?.startDate}`);
   //TODO refactor
@@ -57,7 +58,6 @@ const PersonalTraining = () => {
   const day = new Date(selectedDate).getDate().toString();
 
   const formattedDate = year + '-' + month + '-' + day;
-  const pageEnd = useRef();
 
   const handlerTab = num => {
     if (num === 2) {
@@ -101,8 +101,9 @@ const PersonalTraining = () => {
   useEffect(() => {
     const getData = async () => {
       const { result } = await getTrainerProfile(page);
-      setTrainerData([...trainerData, ...result.data]);
+      setTrainerData(prevTrainerData => [...prevTrainerData, ...result.data]);
       setLoading(true);
+
       if (result.data.length !== 0) {
         setLoadingImg(true);
       } else {

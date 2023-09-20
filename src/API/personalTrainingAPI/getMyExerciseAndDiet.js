@@ -1,8 +1,7 @@
-const getTrainerProfile = async page => {
+const getMyExerciseAndDiet = async formattedDate => {
   try {
     const response = await fetch(
-      `http://10.58.52.70:3000/trainers/list?limit=5&page=${page}`,
-      // '/data/trainerProfile.json',
+      `http://10.58.52.224:3000/custom?weekday=${formattedDate}`,
       {
         method: 'GET',
         headers: {
@@ -19,4 +18,4 @@ const getTrainerProfile = async page => {
   }
 };
 
-export default getTrainerProfile;
+export default getMyExerciseAndDiet;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ButtonM from '../../components/ButtonM/ButtonM';
-// import getConsultListData from '../../API/getConsultListData';
+import getConsultListData from '../../API/personalTrainingAPI/getConsultListData';
 import './CounselList.scss';
 
 const CounselList = () => {
@@ -11,23 +11,14 @@ const CounselList = () => {
   const onClickmatchingButton = trainerId =>
     navigate(`/payment/${trainerId}?type=${'gold'}`);
 
-  const getConsultListData = () => {
-    fetch(
-      // '/data/consultListData.json',
-      'http://10.58.52.222:3000/consultant/posts/list/3',
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          authorization: localStorage.getItem('authorization'),
-        },
-      },
-    )
-      .then(res => res.json())
-      .then(data => setConsultList(data.message));
-  };
+  useEffect(() => {
+    const getData = async () => {
+      const { result } = await getConsultListData();
+      setConsultList(result.message);
+    };
 
-  useEffect(() => getConsultListData(), []);
+    getData();
+  }, []);
 
   return (
     <div className="counselList">
@@ -49,8 +40,8 @@ const CounselList = () => {
 };
 
 export default CounselList;
+
 const ChatTrainerBox = ({
-  postId,
   trainerId,
   trainerImage,
   trainerNickname,
@@ -84,7 +75,7 @@ const ChatTrainerBox = ({
       <ButtonM
         firstText="1:1"
         secondText="매칭하기"
-        onClick={() => onClickmatchingButton()}
+        onClick={() => onClickmatchingButton(trainerId)}
       />
     </div>
   );

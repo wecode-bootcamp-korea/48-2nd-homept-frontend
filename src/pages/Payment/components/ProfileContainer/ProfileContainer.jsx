@@ -2,7 +2,6 @@ import React from 'react';
 import './ProfileContainer.scss';
 
 const ProfileContainer = ({ data }) => {
-  console.log(data);
   return (
     <div className="profileContainer">
       <div className="imgBox">
