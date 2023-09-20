@@ -19,7 +19,7 @@ const WriteHeader = ({ emojiName, nickName, setClickedMenu }) => {
         />
         <div className="trainerInfo">
           <div className="trainerEmoji">
-            {emojiName == 'trainer' ? '💪' : '🦾'}
+            {emojiName == 'trainer' ? '💪' : ''}
           </div>
           <div className="trainerNickname">{nickName}</div>
         </div>

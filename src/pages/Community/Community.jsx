@@ -81,7 +81,7 @@ const Community = () => {
 
   useEffect(() => {
     const getCommunityData = () => {
-      // fetch('http://13.124.97.236:3000/community/posts/all', {
+      // fetch('http://10.58.52.224:3000/community/posts/all', {
       fetch(`${BASE_API_URL}/community/posts/all`, {
         headers: {
           'Content-Type': 'application/json;charset=utf-8',

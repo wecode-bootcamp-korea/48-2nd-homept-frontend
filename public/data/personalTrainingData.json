@@ -47,7 +47,7 @@
     {
       "id": 3,
       "name": "저녁",
-      "imageUrl": "",
+      "imageUrl": "/images/diet2.jpg",
       "description": "닭가슴살(200g) + 야채 샐러드",
       "checkbox": 1
     }

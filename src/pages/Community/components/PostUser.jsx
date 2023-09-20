@@ -112,7 +112,7 @@ const PostUser = ({ comments, getPostDetailData }) => {
           <div key={item.commentId} className="userBox">
             <div className="userDetail">
               <span className="user">
-                {`🥉`}
+                🥉
                 {item.nickname}
               </span>
               <div className="actions">

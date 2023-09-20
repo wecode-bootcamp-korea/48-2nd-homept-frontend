@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import CheckBox from '../CheckBox/CheckBox';
-import getMyExerciseAndDiet from '../../../../API/getMyExerciseAndDiet';
-import postCheckDiet from '../../../../API/postCheckDiet';
-import postCheckExercise from '../../../../API/postCheckExercise';
+import getMyExerciseAndDiet from '../../../../API/personalTrainingAPI/getMyExerciseAndDiet';
+import postCheckDiet from '../../../../API/personalTrainingAPI/postCheckDiet';
+import postCheckExercise from '../../../../API/personalTrainingAPI/postCheckExercise';
 import './MyTraining.scss';
 
 const MyTraining = ({
@@ -22,21 +22,31 @@ const MyTraining = ({
 
   useEffect(() => {
     if (checkedBox.type === 'diet') {
-      postCheckDiet(
-        checkedBox,
-        formattedDate,
-        getMyExerciseAndDiet,
-        setTrainingData,
-      );
+      const getData = async () => {
+        await postCheckDiet(checkedBox, formattedDate);
+      };
+      getData();
+
+      const getNewExerciseData = async () => {
+        const { result } = await getMyExerciseAndDiet(formattedDate);
+
+        setTrainingData({ exercise: result.exercise, diet: result.diet });
+      };
+      getNewExerciseData();
     }
 
-    if (checkedBox.type === 'exercise') {
-      postCheckExercise(
-        checkedBox,
-        formattedDate,
-        getMyExerciseAndDiet,
-        setTrainingData,
-      );
+    if (checkedBox.type === 'diet') {
+      const getData = async () => {
+        await postCheckExercise(checkedBox, formattedDate);
+      };
+      getData();
+
+      const getNewDietData = async () => {
+        const { result } = await getMyExerciseAndDiet(formattedDate);
+
+        setTrainingData({ exercise: result.exercise, diet: result.diet });
+      };
+      getNewDietData();
     }
   }, [checkedBox]);
 

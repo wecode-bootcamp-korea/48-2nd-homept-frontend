@@ -1,5 +1,6 @@
 import React from 'react';
 import { BsCheckCircle, BsCheckCircleFill } from 'react-icons/bs';
+import { FcEditImage } from 'react-icons/fc';
 import './CheckBox.scss';
 
 const CheckBox = ({
@@ -24,7 +25,7 @@ const CheckBox = ({
                 alt="exerciseIMG"
               />
             ) : (
-              <img src="/images/fitness.PNG" alt="IMG" />
+              <FcEditImage className="noImageIcon" />
             )}
           </div>
           <div className="textBox">

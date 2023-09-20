@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import WriteHeader from './components/WriteHeader/WriteHeader';
 import InputWrap from './components/InputWrap/InputWrap';
 import MenuModal from './components/MenuModal/MenuModal';
-import postPostContent from '../../API/postPostContent';
+import postPostContent from '../../API/personalTrainingAPI/postPostContent';
 import './WriteCounsel.scss';
 
 const WriteCounsel = () => {
@@ -21,14 +21,17 @@ const WriteCounsel = () => {
     setContent(value);
   };
 
-  const onClickSend = () => {
-    postPostContent(content, trainerId);
-    navigate(`/personal-training/counsel/chatting/${trainerId}`);
+  const onClickPostSend = () => {
+    const getData = async () => {
+      await postPostContent(content, trainerId);
+      navigate(`/personal-training/counsel/chatting/${trainerId}`);
+    };
+    getData();
   };
 
   const handleOnKeyPress = e => {
     if (e.key === 'Enter') {
-      onClickSend();
+      onClickPostSend();
     }
   };
 
@@ -56,7 +59,7 @@ const WriteCounsel = () => {
       <InputWrap
         handleContent={handleContent}
         content={content}
-        onClickSend={onClickSend}
+        onClickSend={onClickPostSend}
         handleOnKeyPress={handleOnKeyPress}
       />
     </div>

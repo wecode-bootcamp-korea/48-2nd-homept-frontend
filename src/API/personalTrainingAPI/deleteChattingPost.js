@@ -1,7 +1,7 @@
 const deleteChattingPost = async chattingData => {
   try {
     const response = await fetch(
-      `http://10.58.52.227:3000/consultant/posts/${chattingData[0].postId}`,
+      `http://10.58.52.224:3000/consultant/posts/${chattingData[0].postId}`,
       {
         method: 'DELETE',
         headers: {

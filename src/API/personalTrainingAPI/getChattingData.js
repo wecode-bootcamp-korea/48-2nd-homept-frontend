@@ -1,8 +1,7 @@
-const getMyExerciseAndDiet = async formattedDate => {
+const getChattingData = async trainerId => {
   try {
     const response = await fetch(
-      // `http://10.58.52.178:3000/custom?userId=1&weekday=${formattedDate}`,
-      '/data/personalTrainingData.json',
+      `http://10.58.52.224:3000/consultant/posts?trainerProfileId=${trainerId}`,
       {
         method: 'GET',
         headers: {
@@ -11,7 +10,6 @@ const getMyExerciseAndDiet = async formattedDate => {
         },
       },
     );
-
     const result = await response.json();
     return { result };
   } catch (err) {
@@ -20,4 +18,4 @@ const getMyExerciseAndDiet = async formattedDate => {
   }
 };
 
-export default getMyExerciseAndDiet;
+export default getChattingData;

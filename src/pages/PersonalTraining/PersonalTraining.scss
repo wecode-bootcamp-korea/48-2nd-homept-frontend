@@ -22,7 +22,9 @@
 
   .loadingImg {
     display: flex;
-    justify-content: center;
-    height: 90px;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 95px;
   }
 }

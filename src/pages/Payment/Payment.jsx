@@ -41,7 +41,7 @@ const Payment = () => {
           authorization: localStorage.getItem('authorization'),
         },
         body: JSON.stringify({
-          trainerId,
+          trainerId: Number(trainerId),
         }),
       },
     )

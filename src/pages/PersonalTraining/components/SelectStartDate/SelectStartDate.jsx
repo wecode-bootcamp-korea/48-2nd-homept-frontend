@@ -2,7 +2,7 @@ import React from 'react';
 import Calendar from 'react-calendar';
 import 'moment/locale/ko';
 import moment from 'moment';
-import postSelectedStartDate from '../../../../API/postSelectedStartDate';
+import postSelectedStartDate from '../../../../API/personalTrainingAPI/postSelectedStartDate';
 import './SelectStartDate.scss';
 
 const SelectStartDate = ({ setPtStartDate, ptStartDate, selectedButton }) => {
