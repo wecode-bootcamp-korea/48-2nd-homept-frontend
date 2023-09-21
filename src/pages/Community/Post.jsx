@@ -48,7 +48,7 @@ const Post = () => {
 
   useEffect(() => {
     const getPostUser = () => {
-      // fetch('http://13.124.97.236:3000/users/mypage', {
+      // fetch('http://10.58.52.105:3000/users/mypage', {
       fetch(`${BASE_API_URL}/users/mypage`, {
         method: 'GET',
         headers: {
@@ -83,7 +83,7 @@ const Post = () => {
       formData.append('selectedFile', selectedFile);
     }
     fetch(`${BASE_API_URL}/community/posts/upload`, {
-      // fetch('http://13.124.97.236:3000/community/posts/upload', {
+      // fetch('http://10.58.52.105:3000/community/posts/upload', {
       method: 'POST',
       headers: {
         Authorization: localStorage.getItem('authorization'),

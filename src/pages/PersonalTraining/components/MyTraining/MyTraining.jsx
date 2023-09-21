@@ -27,26 +27,26 @@ const MyTraining = ({
       };
       getData();
 
-      const getNewExerciseData = async () => {
-        const { result } = await getMyExerciseAndDiet(formattedDate);
-
-        setTrainingData({ exercise: result.exercise, diet: result.diet });
-      };
-      getNewExerciseData();
-    }
-
-    if (checkedBox.type === 'diet') {
-      const getData = async () => {
-        await postCheckExercise(checkedBox, formattedDate);
-      };
-      getData();
-
       const getNewDietData = async () => {
         const { result } = await getMyExerciseAndDiet(formattedDate);
 
         setTrainingData({ exercise: result.exercise, diet: result.diet });
       };
       getNewDietData();
+    }
+
+    if (checkedBox.type === 'exercise') {
+      const getData = async () => {
+        await postCheckExercise(checkedBox, formattedDate);
+      };
+      getData();
+
+      const getNewExerciseData = async () => {
+        const { result } = await getMyExerciseAndDiet(formattedDate);
+
+        setTrainingData({ exercise: result.exercise, diet: result.diet });
+      };
+      getNewExerciseData();
     }
   }, [checkedBox]);
 

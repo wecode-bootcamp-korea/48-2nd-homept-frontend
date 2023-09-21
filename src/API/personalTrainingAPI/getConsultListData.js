@@ -1,7 +1,7 @@
 const getConsultListData = async () => {
   try {
     const response = await fetch(
-      'http://10.58.52.224:3000/consultant/posts/list/3 ',
+      'http://10.58.52.105:3000/consultant/posts/list/3 ',
       {
         method: 'GET',
         headers: {

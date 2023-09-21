@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { FcAddImage } from 'react-icons/fc';
 import ButtonS from '../../components/ButtonS/ButtonS';
-import postDietImage from '../../API/personalTrainingAPI/postDietImage';
+
 import './DetailModal.scss';
 
 const DetailModal = ({
@@ -16,6 +16,7 @@ const DetailModal = ({
   const ref = useRef();
   const ImgRef = useRef();
   const [imgFile, setImgFile] = useState('');
+  const formData = new FormData();
 
   const saveImgFile = () => {
     const file = ImgRef.current.files[0];
@@ -25,17 +26,32 @@ const DetailModal = ({
       setImgFile(reader.result);
     };
   };
-  const handleCloseModal = e => {
-    if (currentModalData && (!ref.current || !ref.current.contains(e.target)))
-      closeModal();
-  };
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleCloseModal);
-    return () => {
-      document.removeEventListener('mousedown', handleCloseModal);
-    };
-  }, []);
+  const postDietImage = () => {
+    const selectedFile = ImgRef.current.files[0];
+
+    if (!selectedFile) {
+      alert('사진을 선택하세요');
+      return;
+    }
+
+    formData.append('selectedFile', selectedFile);
+
+    fetch(`http://10.58.52.105:3000/custom/diet-image?dietId=${id}`, {
+      method: 'POST',
+      headers: {
+        authorization: localStorage.getItem('authorization'),
+      },
+      body: formData,
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('이미지 업로드 완료:', data);
+      })
+      .catch(error => {
+        console.error('이미지 업로드 에러:', error);
+      });
+  };
 
   return (
     <div className="detailModal">

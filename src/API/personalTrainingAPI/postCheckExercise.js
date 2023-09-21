@@ -1,6 +1,6 @@
 const postCheckExercise = async (checkedBox, formattedDate) => {
   try {
-    await fetch('http://10.58.52.224:3000/custom/checkExercise', {
+    await fetch('http://10.58.52.105:3000/custom/checkExercise', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
