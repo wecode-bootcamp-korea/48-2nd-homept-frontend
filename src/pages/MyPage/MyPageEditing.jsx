@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from './components/Button/Button';
 import FormItem from './components/FormItem/FormItem';
-import { INPUT_DATA, BUTTON_DATA } from './inputData.js';
+import { INPUT_DATA } from './inputData.js';
 import './MyPageEditing.scss';
 
 const MyPageEditing = () => {
@@ -51,6 +51,10 @@ const MyPageEditing = () => {
   }, []);
 
   const modifyUserInfo = () => {
+    if (Number(formData.weight) === 0 || Number(formData.height) === 0) {
+      alert('먼지보다 가벼우시군요!😱 정확한 키와 몸무게를 입력해주세요!');
+      return;
+    }
     fetch(`${apiUrl}/users/mypage/update`, {
       method: 'POST',
       headers: {
