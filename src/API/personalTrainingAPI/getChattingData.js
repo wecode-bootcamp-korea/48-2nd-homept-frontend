@@ -1,7 +1,7 @@
 const getChattingData = async trainerId => {
   try {
     const response = await fetch(
-      `http://10.58.52.224:3000/consultant/posts?trainerProfileId=${trainerId}`,
+      `http://10.58.52.105:3000/consultant/posts?trainerProfileId=${trainerId}`,
       {
         method: 'GET',
         headers: {

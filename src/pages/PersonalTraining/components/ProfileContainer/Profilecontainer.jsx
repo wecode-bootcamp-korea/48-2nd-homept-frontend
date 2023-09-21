@@ -8,7 +8,7 @@ const ProfileContainer = ({ data }) => {
 
   const fetchConsultStatus = () => {
     if (localStorage.getItem('authorization')) {
-      fetch(`http://10.58.52.224:3000/custom/checkId?trainerId=${data.id}`, {
+      fetch(`http://10.58.52.105:3000/custom/checkId?trainerId=${data.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',

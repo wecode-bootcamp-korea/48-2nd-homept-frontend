@@ -1,7 +1,7 @@
 const getTrainerProfile = async page => {
   try {
     const response = await fetch(
-      `http://10.58.52.224:3000/trainers/list?limit=5&page=${page}`,
+      `http://10.58.52.105:3000/trainers/list?limit=5&page=${page}`,
       {
         method: 'GET',
         headers: {

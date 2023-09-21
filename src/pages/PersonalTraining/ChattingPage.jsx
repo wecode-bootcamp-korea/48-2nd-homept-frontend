@@ -15,12 +15,18 @@ const ChattingPage = () => {
   const [chattingData, setChattingData] = useState([]);
   const [clickedMenu, setClickedMenu] = useState(false);
 
+  // const onClickCommentSend = async () => {
+  //   const getData = async () => {
+  //     await postComment(comment, chattingData);
+  //   };
+  //   await getData();
+  //   getChattingData(trainerId);
+  // };
+
   const onClickCommentSend = async () => {
-    const getData = async () => {
-      await postComment(comment, chattingData);
-    };
-    await getData();
-    getChattingData(trainerId);
+    await postComment(comment, chattingData);
+    await getChattingData(trainerId); // 데이터 업데이트
+    setComment(''); // 댓글 입력창 초기화
   };
 
   const handleComment = value => {
@@ -39,8 +45,7 @@ const ChattingPage = () => {
       setChattingData(result.data);
     };
     getData();
-  }, []);
-
+  }, [comment]);
   return (
     <div className="conversationContainer">
       {clickedMenu && <div className="modalOverlay" />}
@@ -63,7 +68,7 @@ const ChattingPage = () => {
         ))}
         {chattingData[0]?.comments.map(comment => (
           <ChatBox
-            key={comment.commentId}
+            key={comment.commentId ? comment.commentId : ''}
             emojiName={comment.emojiName}
             nickName={comment.nickname}
             chattingData={comment.content}
@@ -100,19 +105,24 @@ const ChatBox = ({
   className,
 }) => {
   return (
-    <div className="chatBox">
-      <div className="emojiAndNickNameWrap">
-        <div className="emojiName">
-          {emojiName === 'gold' && '🥇'}
+    <div className={nickName ? 'chatBox' : ''}>
+      <div className={nickName ? 'emojiAndNickNameWrap' : ''}>
+        <div className={nickName ? 'emojiName' : ''}>
+          {nickName ? emojiName === 'gold' && '🥇' : ''}
           {emojiName === 'silver' && '🥈'}
           {emojiName === 'bronze' && '🥉'}
           {emojiName === 'trainer' && '💪'}
-          {emojiName === 'ironman' && '🦾'}
         </div>
-        <div className="nickName">{nickName}</div>
+        <div className={nickName ? 'nickName' : ''}>
+          {nickName ? nickName : ''}
+        </div>
       </div>
-      <div className={`${className} contentBox `}>{chattingData}</div>
-      <div className="createDate">{formatUTCDateToKoreanTime(createdAt)}</div>
+      <div className={`${className} contentBox `}>
+        {chattingData ? chattingData : ''}
+      </div>
+      <div className={nickName ? 'createDate' : ''}>
+        {nickName ? formatUTCDateToKoreanTime(createdAt) : ''}
+      </div>
     </div>
   );
 };
