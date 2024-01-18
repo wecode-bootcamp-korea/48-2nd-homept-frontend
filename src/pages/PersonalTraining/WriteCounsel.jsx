@@ -8,14 +8,9 @@ import './WriteCounsel.scss';
 
 const WriteCounsel = () => {
   const navigate = useNavigate();
-  const param = useParams();
-
+  const { id: trainerId, emojiName, nickName } = useParams();
   const [content, setContent] = useState('');
   const [clickedMenu, setClickedMenu] = useState(false);
-
-  const trainerId = param.id;
-  const emojiName = param.emojiName;
-  const nickName = param.nickName;
 
   const handleContent = value => {
     setContent(value);

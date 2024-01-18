@@ -13,18 +13,19 @@ const WeekCalendar = ({
   const engWeek = ['SU', 'MO', 'TH', 'WE', 'TE', 'FR', 'SA'];
 
   const dateOnClick = date => setSelectedDate(date);
+
   const onPressArrowLeft = () => {
-    const newDate = new Date(dateState.date.valueOf() - 86400000 * 7);
-    const newWeek = makeWeekArr(newDate);
-    setDateState({ date: newDate, week: newWeek });
+    const oneWeekAgoDate = new Date(dateState.date.valueOf() - 86400000 * 7);
+    const lastWeekDates = makeWeekArr(oneWeekAgoDate);
+    setDateState({ date: oneWeekAgoDate, week: lastWeekDates });
   };
 
   const onPressArrowRight = () => {
-    const newDate = new Date(dateState.date.valueOf() + 86400000 * 7);
-    const newWeek = makeWeekArr(newDate);
+    const oneWeekLaterDate = new Date(dateState.date.valueOf() + 86400000 * 7);
+    const nextWeekDates = makeWeekArr(oneWeekLaterDate);
     setDateState({
-      date: newDate,
-      week: newWeek,
+      date: oneWeekLaterDate,
+      week: nextWeekDates,
     });
   };
   const getWeek = date => {

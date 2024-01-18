@@ -28,9 +28,8 @@ const SelectStartDate = ({ setPtStartDate, ptStartDate, selectedButton }) => {
           className="seletedDateBox"
           onClick={() => postSelectedStartDate(selectedStartDate)}
         >
-          {ptStartDate && moment(ptStartDate).format('MM')}월
-          {ptStartDate && moment(ptStartDate).format('DD')}일 (
-          {ptStartDate && moment(ptStartDate).format('dddd').slice(0, 1)}) 선택
+          {moment(ptStartDate).format('MM')}월{moment(ptStartDate).format('DD')}
+          일 ({moment(ptStartDate).format('dddd').slice(0, 1)}) 선택
         </button>
       )}
     </div>

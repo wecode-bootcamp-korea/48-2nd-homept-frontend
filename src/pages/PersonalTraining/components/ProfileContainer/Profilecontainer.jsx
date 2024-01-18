@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
+import ProfileContent from '../ProfileContent/ProfileContent';
 import ButtonS from '../../../../components/ButtonS/ButtonS';
 import './ProfileContainer.scss';
 import { BASE_API_URL } from '../../../../config';
@@ -64,26 +65,3 @@ const ProfileContainer = ({ data }) => {
   );
 };
 export default ProfileContainer;
-
-const PROFILE_CONTENT_TITLE = [
-  { title: 'LICENSE', keyText: 'license' },
-  { title: 'CAREER', keyText: 'career' },
-  { title: 'AWARDS', keyText: 'awards' },
-];
-
-const ProfileContent = ({ data }) => (
-  <>
-    {PROFILE_CONTENT_TITLE.map(text => (
-      <>
-        <div className={`${data[text.keyText] !== null ? 'titleText' : ''}`}>
-          {data[text.keyText] !== null ? text.title : ''}
-        </div>
-        {data[text.keyText]?.map(text => (
-          <div className="contentText" key={text}>
-            {text}
-          </div>
-        ))}
-      </>
-    ))}
-  </>
-);

@@ -8,11 +8,11 @@
   height: auto;
 }
 
-.scroll::-webkit-scrollbar {
-  display: none;
-}
-
 .scroll {
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

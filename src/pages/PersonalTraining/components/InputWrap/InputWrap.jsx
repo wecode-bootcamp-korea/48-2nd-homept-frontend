@@ -20,7 +20,7 @@ const InputWrap = ({
           value={content}
           className="textarea"
           placeholder="궁금한 점을 물어보세요"
-          onKeyDown={e => handleOnKeyPress(e)}
+          onKeyDown={handleOnKeyPress}
         />
         <PiSmileyLight className="smileIcon" />
         <HiHashtag className="hashIcon" />
