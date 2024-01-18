@@ -1,7 +1,9 @@
+import { BASE_API_URL } from '../../config';
+
 const getMyExerciseAndDiet = async formattedDate => {
   try {
     const response = await fetch(
-      `http://10.58.52.105:3000/custom?weekday=${formattedDate}`,
+      `${BASE_API_URL}/custom?weekday=${formattedDate}`,
       {
         method: 'GET',
         headers: {

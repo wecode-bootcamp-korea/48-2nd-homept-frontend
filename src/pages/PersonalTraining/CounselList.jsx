@@ -22,7 +22,7 @@ const CounselList = () => {
 
   return (
     <div className="counselList">
-      {consultList?.map(data => (
+      {consultList.map(data => (
         <ChatTrainerBox
           key={data.postId}
           postId={data.postId}

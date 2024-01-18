@@ -1,7 +1,9 @@
+import { BASE_API_URL } from '../../config';
+
 const getTrainerProfile = async page => {
   try {
     const response = await fetch(
-      `http://10.58.52.105:3000/trainers/list?limit=5&page=${page}`,
+      `${BASE_API_URL}/trainers/list?limit=5&page=${page}`,
       {
         method: 'GET',
         headers: {

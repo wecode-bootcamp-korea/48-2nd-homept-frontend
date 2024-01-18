@@ -1,6 +1,8 @@
+import { BASE_API_URL } from '../../config';
+
 const postPostContent = async (content, trainerId) => {
   try {
-    await fetch('http://10.58.52.105:3000/consultant/posts/upload', {
+    await fetch(`${BASE_API_URL}/consultant/posts/upload`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

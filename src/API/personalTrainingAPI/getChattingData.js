@@ -1,7 +1,9 @@
+import { BASE_API_URL } from '../../config';
+
 const getChattingData = async trainerId => {
   try {
     const response = await fetch(
-      `http://10.58.52.105:3000/consultant/posts?trainerProfileId=${trainerId}`,
+      `${BASE_API_URL}/consultant/posts?trainerProfileId=${trainerId}`,
       {
         method: 'GET',
         headers: {

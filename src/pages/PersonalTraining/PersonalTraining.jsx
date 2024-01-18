@@ -47,6 +47,7 @@ const PersonalTraining = () => {
     exercise: [],
     diet: [],
   });
+  const isSelected = !ptStartDate;
 
   const loadMore = () => {
     setPage(prev => prev + 1);
@@ -114,7 +115,7 @@ const PersonalTraining = () => {
   }, [page]);
 
   useEffect(() => {
-    if (!ptStartDate) {
+    if (isSelected) {
       setSelectedButton(true);
     } else {
       setSelectedButton(false);
