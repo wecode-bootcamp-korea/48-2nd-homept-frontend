@@ -1,3 +1,5 @@
+import { BASE_API_URL } from '../../config';
+
 const postDietImage = (ImgRef, id) => {
   const selectedFile = ImgRef.current.files[0];
   if (!selectedFile) {
@@ -8,7 +10,7 @@ const postDietImage = (ImgRef, id) => {
   const formData = new FormData();
   formData.append('selectedFile', selectedFile);
 
-  fetch(`http://10.58.52.224:3000/custom/diet-image?dietId=${id}`, {
+  fetch(`${BASE_API_URL}/custom/diet-image?dietId=${id}`, {
     method: 'POST',
     headers: {
       authorization: localStorage.getItem('authorization'),

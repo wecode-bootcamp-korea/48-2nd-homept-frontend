@@ -1,5 +1,7 @@
+import { BASE_API_URL } from '../../config';
+
 const postSelectedStartDate = selectedStartDate =>
-  fetch('http://10.58.52.105:3000/custom/start', {
+  fetch(`${BASE_API_URL}/custom/start`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',

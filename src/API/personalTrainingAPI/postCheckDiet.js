@@ -1,6 +1,8 @@
+import { BASE_API_URL } from '../../config';
+
 const postCheckDiet = async (checkedBox, formattedDate) => {
   try {
-    await fetch('http://10.58.52.105:3000/custom/checkDiet', {
+    await fetch(`${BASE_API_URL}/custom/checkDiet`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

@@ -2,13 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import ButtonS from '../../../../components/ButtonS/ButtonS';
 import './ProfileContainer.scss';
+import { BASE_API_URL } from '../../../../config';
 
 const ProfileContainer = ({ data }) => {
   const navigate = useNavigate();
 
   const fetchConsultStatus = () => {
     if (localStorage.getItem('authorization')) {
-      fetch(`http://10.58.52.105:3000/custom/checkId?trainerId=${data.id}`, {
+      fetch(`${BASE_API_URL}/custom/checkId?trainerId=${data.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
