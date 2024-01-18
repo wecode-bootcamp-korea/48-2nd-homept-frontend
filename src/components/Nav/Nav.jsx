@@ -40,7 +40,7 @@ const Nav = () => {
       url: '/sign-in',
       icon: <IoSwapVerticalOutline className="Icon" />,
       text: (
-        <div className="text">
+        <div className="content">
           {localStorage.getItem('authorization') ? '로그아웃' : '로그인'}
         </div>
       ),

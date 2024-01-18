@@ -58,11 +58,12 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
-.scroll::-webkit-scrollbar {
-  display: none;
-}
 
 .scroll {
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

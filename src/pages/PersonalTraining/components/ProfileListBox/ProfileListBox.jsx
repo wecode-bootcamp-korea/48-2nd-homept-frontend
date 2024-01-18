@@ -6,7 +6,7 @@ const ProfileListBox = ({ trainerData }) => {
   return (
     <div className="profileListBox scroll">
       {trainerData?.map(data => (
-        <ProfileContainer trainerData={trainerData} data={data} key={data.id} />
+        <ProfileContainer data={data} key={data.id} />
       ))}
     </div>
   );

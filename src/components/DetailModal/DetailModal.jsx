@@ -59,7 +59,7 @@ const DetailModal = ({
       <div className="modal scroll" ref={ref}>
         {imageUrl ? (
           <div className="imgBox">
-            <img src={`${imageUrl}`} alt="IMG" className="exerciseImage" />
+            <img src={imageUrl} alt="exerciseImage" className="exerciseImage" />
           </div>
         ) : (
           <form className="formDietImage" enctype="multipart/form-data">
