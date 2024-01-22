@@ -1,3 +1,5 @@
+import PROFILE_CONTENT_TITLE from '../../../../constants/profileTitle';
+
 export const ProfileContent = ({ data }) => (
   <>
     {PROFILE_CONTENT_TITLE.map(text => (
@@ -14,9 +16,3 @@ export const ProfileContent = ({ data }) => (
     ))}
   </>
 );
-
-const PROFILE_CONTENT_TITLE = [
-  { title: 'LICENSE', keyText: 'license' },
-  { title: 'CAREER', keyText: 'career' },
-  { title: 'AWARDS', keyText: 'awards' },
-];

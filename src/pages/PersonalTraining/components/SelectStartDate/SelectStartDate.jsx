@@ -9,6 +9,12 @@ const SelectStartDate = ({ setPtStartDate, ptStartDate, selectedButton }) => {
   const selectedStartDate =
     ptStartDate && moment(ptStartDate).format('YYYY-MM-DD');
 
+  const formatDate = date => {
+    <>
+      {moment(date).format('MM월 DD일')} (
+      {moment(date).format('dddd').slice(0, 1)})
+    </>;
+  };
   return (
     <div className="selectStartDate">
       <div className="calendarTitle">운동 시작 날짜를 선택해주세요</div>
@@ -28,8 +34,8 @@ const SelectStartDate = ({ setPtStartDate, ptStartDate, selectedButton }) => {
           className="seletedDateBox"
           onClick={() => postSelectedStartDate(selectedStartDate)}
         >
-          {moment(ptStartDate).format('MM')}월{moment(ptStartDate).format('DD')}
-          일 ({moment(ptStartDate).format('dddd').slice(0, 1)}) 선택
+          {formatDate(ptStartDate)}
+          선택
         </button>
       )}
     </div>
