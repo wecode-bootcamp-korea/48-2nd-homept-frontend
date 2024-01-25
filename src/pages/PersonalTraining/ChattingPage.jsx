@@ -25,8 +25,8 @@ const ChattingPage = () => {
 
   const onClickCommentSend = async () => {
     await postComment(comment, chattingData);
-    await getChattingData(trainerId); // 데이터 업데이트
-    setComment(''); // 댓글 입력창 초기화
+    await getChattingData(trainerId);
+    setComment('');
   };
 
   const handleComment = value => {
