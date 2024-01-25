@@ -15,14 +15,6 @@ const ChattingPage = () => {
   const [chattingData, setChattingData] = useState([]);
   const [clickedMenu, setClickedMenu] = useState(false);
 
-  // const onClickCommentSend = async () => {
-  //   const getData = async () => {
-  //     await postComment(comment, chattingData);
-  //   };
-  //   await getData();
-  //   getChattingData(trainerId);
-  // };
-
   const onClickCommentSend = async () => {
     await postComment(comment, chattingData);
     await getChattingData(trainerId);
@@ -108,7 +100,7 @@ const ChatBox = ({
     <div className={nickName ? 'chatBox' : ''}>
       <div className={nickName ? 'emojiAndNickNameWrap' : ''}>
         <div className={nickName ? 'emojiName' : ''}>
-          {nickName ? emojiName === 'gold' && '🥇' : ''}
+          {emojiName === 'gold' && '🥇'}
           {emojiName === 'silver' && '🥈'}
           {emojiName === 'bronze' && '🥉'}
           {emojiName === 'trainer' && '💪'}

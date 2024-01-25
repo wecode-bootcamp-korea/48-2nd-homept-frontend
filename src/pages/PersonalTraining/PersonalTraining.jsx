@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { BASE_API_URL } from '../../config';
 import { BeatLoader } from 'react-spinners';
 import ContentTab from '../../components/ContentTab/ContentTab';
 import ProfileListBox from './components/ProfileListBox/ProfileListBox';
@@ -22,7 +23,7 @@ const PersonalTraining = () => {
     startDate.getMonth(),
     startDate.getDate(),
   );
-
+  const [userInfo, setUserInfo] = useState('');
   const nowDate = new Date();
 
   const nowYearMonthDate = new Date(
@@ -50,6 +51,24 @@ const PersonalTraining = () => {
   });
   const isSelected = !ptStartDate;
 
+  const getUserInfo = () => {
+    fetch(`${BASE_API_URL}/users/mypage`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: localStorage.getItem('authorization'),
+      },
+    })
+      .then(res => res.json())
+      .then(result => {
+        setUserInfo(result.myPageData);
+      });
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
   const loadMore = () => {
     setPage(prev => prev + 1);
   };
@@ -64,7 +83,7 @@ const PersonalTraining = () => {
   const handlerTab = num => {
     if (num === 2) {
       if (localStorage.getItem('authorization')) {
-        if (membershipData[0]?.membershipName === 'gold') {
+        if (userInfo.grade === 'gold') {
           setSelectedTab(num);
         } else {
           alert('멤버쉽 가입을 해주세요');
@@ -103,7 +122,7 @@ const PersonalTraining = () => {
     };
 
     getData();
-  }, [formattedDate]);
+  }, [formattedDate, userInfo]);
 
   useEffect(() => {
     const getData = async () => {
@@ -174,7 +193,7 @@ const PersonalTraining = () => {
             setTrainingData={setTrainingData}
             trainingData={trainingData}
           />
-        ) : membershipData[0].startDate !== null ? (
+        ) : membershipData[0]?.startDate !== null ? (
           <DaysUntilStart
             startYearMonthDate={startYearMonthDate}
             nowYearMonthDate={nowYearMonthDate}
