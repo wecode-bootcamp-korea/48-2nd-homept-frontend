@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router';
 import ProfileContent from '../ProfileContent/ProfileContent';
 import ButtonS from '../../../../components/ButtonS/ButtonS';
 import './ProfileContainer.scss';
-import { BASE_API_URL } from '../../../../config';
+import { API_BASE_URL } from '../../../../constants/api';
 
 const ProfileContainer = ({ data }) => {
   const navigate = useNavigate();
 
   const fetchConsultStatus = () => {
     if (localStorage.getItem('authorization')) {
-      fetch(`${BASE_API_URL}/custom/checkId?trainerId=${data.id}`, {
+      fetch(`${API_BASE_URL}/custom/checkId?trainerId=${data.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',

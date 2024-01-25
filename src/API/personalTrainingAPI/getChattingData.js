@@ -1,9 +1,9 @@
-import { BASE_API_URL } from '../../config';
+import { API_BASE_URL } from '../../constants/api';
 
 const getChattingData = async trainerId => {
   try {
     const response = await fetch(
-      `${BASE_API_URL}/consultant/posts?trainerProfileId=${trainerId}`,
+      `${API_BASE_URL}/consultant/posts?trainerProfileId=${trainerId}`,
       {
         method: 'GET',
         headers: {

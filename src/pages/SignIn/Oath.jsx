@@ -2,11 +2,11 @@ import { React, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
 import { REST_API_KEY, REDIRECT_URI_SECOND } from './kakaoLoginData';
+import { API_BASE_URL } from '../../constants/api.jsx';
 
 const Oath = () => {
   const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI_SECOND}&response_type=code`;
   const code = new URL(window.location.href).searchParams.get('code');
-  const apiUrl = process.env.REACT_APP_API_URL;
 
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const Oath = () => {
   };
 
   const checkNewbie = () => {
-    fetch(`${apiUrl}/users/kakao-sign-in?code=${code}`, {
+    fetch(`${API_BASE_URL}/users/kakao-sign-in?code=${code}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

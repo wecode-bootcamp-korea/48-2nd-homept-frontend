@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import PostNav from './components/PostNav';
 import ContentTab from '../../components/ContentTab/ContentTab';
-import { BASE_API_URL } from '../../config';
+import { API_BASE_URL } from '../../constants/api';
 import './Post.scss';
 
 const Post = () => {
@@ -49,7 +49,7 @@ const Post = () => {
   useEffect(() => {
     const getPostUser = () => {
       // fetch('http://10.58.52.105:3000/users/mypage', {
-      fetch(`${BASE_API_URL}/users/mypage`, {
+      fetch(`${API_BASE_URL}/users/mypage`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -82,7 +82,7 @@ const Post = () => {
     if (selectedFile) {
       formData.append('selectedFile', selectedFile);
     }
-    fetch(`${BASE_API_URL}/community/posts/upload`, {
+    fetch(`${API_BASE_URL}/community/posts/upload`, {
       // fetch('http://10.58.52.105:3000/community/posts/upload', {
       method: 'POST',
       headers: {

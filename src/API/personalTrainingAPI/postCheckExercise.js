@@ -1,8 +1,8 @@
-import { BASE_API_URL } from '../../config';
+import { API_BASE_URL } from '../../constants/api';
 
 const postCheckExercise = async (checkedBox, formattedDate) => {
   try {
-    await fetch(`${BASE_API_URL}/custom/checkExercise`, {
+    await fetch(`${API_BASE_URL}/custom/checkExercise`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

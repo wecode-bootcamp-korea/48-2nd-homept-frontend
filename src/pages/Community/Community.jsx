@@ -5,7 +5,7 @@ import CommunityList from './components/CommunityList';
 import CommunityWriteButton from './components/CommunityWriteButton';
 import ContentTab from '../../components/ContentTab/ContentTab';
 import CommunityPagination from './components/CommunityPagination';
-import { BASE_API_URL } from '../../config';
+import { API_BASE_URL } from '../../constants/api';
 import './Community.scss';
 
 const CONTENT_TAP_DATA = [
@@ -50,7 +50,7 @@ const Community = () => {
       return;
     }
     // fetch('http://10.58.52.105:3000/users/mypage', {
-    fetch(`${BASE_API_URL}/users/mypage`, {
+    fetch(`${API_BASE_URL}/users/mypage`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -82,7 +82,7 @@ const Community = () => {
   useEffect(() => {
     const getCommunityData = () => {
       // fetch('http://10.58.52.105:3000/community/posts/all', {
-      fetch(`${BASE_API_URL}/community/posts/all`, {
+      fetch(`${API_BASE_URL}/community/posts/all`, {
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           authorization: localStorage.getItem('authorization'),

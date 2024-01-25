@@ -4,11 +4,11 @@ import Button from './components/Button/Button';
 import FormItem from './components/FormItem/FormItem';
 import Input from './components/Input/Input';
 import { INPUT_DATA, BUTTON_DATA } from './inputData.js';
+import { API_BASE_URL } from '../../constants/api.jsx';
 import './SignUp.scss';
 
 const SignUp = () => {
   const code = new URL(window.location.href).searchParams.get('code');
-  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
   const physicalInfoData = INPUT_DATA.physicalInfo;
@@ -48,7 +48,7 @@ const SignUp = () => {
       alert('닉네임을 입력해주세요!');
       return;
     }
-    fetch(`${apiUrl}/users/duplicate-nickname`, {
+    fetch(`${API_BASE_URL}/users/duplicate-nickname`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -68,7 +68,7 @@ const SignUp = () => {
   };
 
   const signup = () => {
-    fetch(`${apiUrl}/users/kakao-sign-up?code=${code}`, {
+    fetch(`${API_BASE_URL}/users/kakao-sign-up?code=${code}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

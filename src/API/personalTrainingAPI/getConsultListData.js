@@ -1,8 +1,8 @@
-import { BASE_API_URL } from '../../config';
+import { API_BASE_URL } from '../../constants/api';
 
 const getConsultListData = async () => {
   try {
-    const response = await fetch(`${BASE_API_URL}/consultant/posts/list/3 `, {
+    const response = await fetch(`${API_BASE_URL}/consultant/posts/list/3 `, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

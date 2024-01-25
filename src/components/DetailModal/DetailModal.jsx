@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { FcAddImage } from 'react-icons/fc';
 import ButtonS from '../../components/ButtonS/ButtonS';
-import { BASE_API_URL } from '../../config';
+import { API_BASE_URL } from '../../constants/api';
 
 import './DetailModal.scss';
 
@@ -38,7 +38,7 @@ const DetailModal = ({
 
     formData.append('selectedFile', selectedFile);
 
-    fetch(`${BASE_API_URL}/custom/diet-image?dietId=${id}`, {
+    fetch(`${API_BASE_URL}/custom/diet-image?dietId=${id}`, {
       method: 'POST',
       headers: {
         authorization: localStorage.getItem('authorization'),

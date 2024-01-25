@@ -4,7 +4,7 @@ import PostNav from './components/PostNav';
 import PostDetailBox from './components/PostDetailBox';
 import PostUser from './components/PostUser';
 import PostTrainer from './components/PostTrainer';
-import { BASE_API_URL } from '../../config';
+import { API_BASE_URL } from '../../constants/api';
 import './PostDetail.scss';
 
 const PostDetail = () => {
@@ -14,7 +14,7 @@ const PostDetail = () => {
 
   const getPostDetailData = () => {
     // fetch(`http://10.58.52.105:3000/community/posts/${postId}`, {
-    fetch(`${BASE_API_URL}/community/posts/${postId}`, {
+    fetch(`${API_BASE_URL}/community/posts/${postId}`, {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         authorization: localStorage.getItem('authorization'),
