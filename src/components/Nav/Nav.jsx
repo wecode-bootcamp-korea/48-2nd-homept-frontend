@@ -15,25 +15,25 @@ const Nav = () => {
     {
       url: '/community',
       icon: <HiOutlineChatBubbleBottomCenterText className="Icon" />,
-      text: <div className="text">커뮤니티</div>,
+      text: <div className="content">커뮤니티</div>,
       onClick: '',
     },
     {
       url: '/personal-training',
       icon: <IoIosFitness className="Icon" />,
-      text: <div className="text">맞춤운동</div>,
+      text: <div className="content">맞춤운동</div>,
       onClick: '',
     },
     {
       url: '/payment',
       icon: <CiStar className="Icon" />,
-      text: <div className="text">멤버쉽</div>,
+      text: <div className="content">멤버쉽</div>,
       onClick: '',
     },
     {
       url: '/mypage',
       icon: <BsFillPersonFill className="Icon" />,
-      text: <div className="text">마이페이지</div>,
+      text: <div className="content">마이페이지</div>,
       onClick: '',
     },
     {
