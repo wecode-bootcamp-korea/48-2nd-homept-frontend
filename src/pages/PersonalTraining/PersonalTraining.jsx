@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { BASE_API_URL } from '../../config';
+import { API_BASE_URL } from '../../constants/api';
 import { BeatLoader } from 'react-spinners';
 import ContentTab from '../../components/ContentTab/ContentTab';
 import ProfileListBox from './components/ProfileListBox/ProfileListBox';
@@ -52,7 +52,7 @@ const PersonalTraining = () => {
   const isSelected = !ptStartDate;
 
   const getUserInfo = () => {
-    fetch(`${BASE_API_URL}/users/mypage`, {
+    fetch(`${API_BASE_URL}/users/mypage`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

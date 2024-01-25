@@ -3,11 +3,10 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import Button from './components/Button/Button';
 import ProfileContainer from './components/ProfileContainer/ProfileContainer';
 import RadioCard from './components/RadioCard/RadioCard';
+import { API_BASE_URL } from '../../constants/api.jsx';
 import './Payment.scss';
 
 const Payment = () => {
-  const apiUrl = process.env.REACT_APP_API_URL;
-
   const [searchParams, setSearchParams] = useSearchParams();
   let membershipType = searchParams.get('type');
 
@@ -32,7 +31,7 @@ const Payment = () => {
 
   const getTrainerData = () => {
     fetch(
-      `${apiUrl}/payments/trainer-information`,
+      `${API_BASE_URL}/payments/trainer-information`,
       // '/data/trainerData.json',
       {
         method: 'POST',
@@ -66,7 +65,7 @@ const Payment = () => {
 
   const getMembershipData = () => {
     fetch(
-      `${apiUrl}/payments/membership-list`,
+      `${API_BASE_URL}/payments/membership-list`,
       // '/data/membershipData.json',
       {
         method: 'GET',
@@ -96,7 +95,7 @@ const Payment = () => {
   };
 
   const payment = () => {
-    fetch(`${apiUrl}/payments/request`, {
+    fetch(`${API_BASE_URL}/payments/request`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

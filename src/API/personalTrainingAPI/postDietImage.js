@@ -1,4 +1,4 @@
-import { BASE_API_URL } from '../../config';
+import { API_BASE_URL } from '../../constants/api';
 
 const postDietImage = (ImgRef, id) => {
   const selectedFile = ImgRef.current.files[0];
@@ -10,7 +10,7 @@ const postDietImage = (ImgRef, id) => {
   const formData = new FormData();
   formData.append('selectedFile', selectedFile);
 
-  fetch(`${BASE_API_URL}/custom/diet-image?dietId=${id}`, {
+  fetch(`${API_BASE_URL}/custom/diet-image?dietId=${id}`, {
     method: 'POST',
     headers: {
       authorization: localStorage.getItem('authorization'),

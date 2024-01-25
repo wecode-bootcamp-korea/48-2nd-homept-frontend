@@ -1,9 +1,9 @@
-import { BASE_API_URL } from '../../config';
+import { API_BASE_URL } from '../../constants/api';
 
 const getTrainerProfile = async page => {
   try {
     const response = await fetch(
-      `${BASE_API_URL}/trainers/list?limit=5&page=${page}`,
+      `${API_BASE_URL}/trainers/list?limit=5&page=${page}`,
       {
         method: 'GET',
         headers: {

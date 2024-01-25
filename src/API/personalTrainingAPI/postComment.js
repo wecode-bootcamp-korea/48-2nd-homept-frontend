@@ -1,9 +1,9 @@
-import { BASE_API_URL } from '../../config';
+import { API_BASE_URL } from '../../constants/api';
 
 const postComment = async (comment, chattingData) => {
   try {
     await fetch(
-      `${BASE_API_URL}/consultant/posts?postId=${chattingData[0].threadId}`,
+      `${API_BASE_URL}/consultant/posts?postId=${chattingData[0].threadId}`,
       {
         method: 'POST',
         headers: {

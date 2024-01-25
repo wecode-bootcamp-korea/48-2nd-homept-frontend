@@ -1,8 +1,8 @@
-import { BASE_API_URL } from '../../config';
+import { API_BASE_URL } from '../../constants/api';
 
 const deleteChattingPost = async id => {
   try {
-    const response = await fetch(`${BASE_API_URL}/consultant/posts/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/consultant/posts/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

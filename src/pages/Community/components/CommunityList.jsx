@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BASE_API_URL } from '../../../config';
+import { API_BASE_URL } from '../../../constants/api';
+
 import './CommunityList.scss';
 
 const CommunityList = ({
@@ -53,7 +54,7 @@ const CommunityList = ({
     }
 
     // fetch('http://10.58.52.105:3000/users/mypage', {
-    fetch(`${BASE_API_URL}/users/mypage`, {
+    fetch(`${API_BASE_URL}/users/mypage`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import Button from './components/Button/Button';
 import Info from './components/Info/Info';
 import { MYPAGE_INPUT_DATA } from './inputData.js';
+import { API_BASE_URL } from '../../constants/api.jsx';
+
 import './MyPage.scss';
 
 const MyPage = () => {
-  const apiUrl = process.env.REACT_APP_API_URL;
   const physicalInfoData = MYPAGE_INPUT_DATA.physicalInfo;
   const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
@@ -19,7 +20,7 @@ const MyPage = () => {
 
   const getUserInfo = () => {
     fetch(
-      `${apiUrl}/users/mypage`,
+      `${API_BASE_URL}/users/mypage`,
       // '/data/userData.json',
       {
         method: 'GET',

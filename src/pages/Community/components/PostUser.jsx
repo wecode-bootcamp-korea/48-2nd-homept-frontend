@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BASE_API_URL } from '../../../config';
+import { API_BASE_URL } from '../../../constants/api';
 import './PostUser.scss';
 
 const PostUser = ({ comments, getPostDetailData }) => {
@@ -23,7 +23,7 @@ const PostUser = ({ comments, getPostDetailData }) => {
 
   useEffect(() => {
     // fetch('http://10.58.52.105:3000/users/mypage', {
-    fetch(`${BASE_API_URL}/users/mypage`, {
+    fetch(`${API_BASE_URL}/users/mypage`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Button from './components/Button/Button';
 import FormItem from './components/FormItem/FormItem';
 import { MYPAGE_INPUT_DATA } from './inputData.js';
+import { API_BASE_URL } from '../../constants/api.jsx';
 import './MyPageEditing.scss';
 
 const MyPageEditing = () => {
-  const apiUrl = process.env.REACT_APP_API_URL;
-
   const navigate = useNavigate();
 
   const physicalInfoData = MYPAGE_INPUT_DATA.physicalInfo;
@@ -26,7 +25,7 @@ const MyPageEditing = () => {
 
   const getUserInfo = () => {
     fetch(
-      `${apiUrl}/users/mypage`,
+      `${API_BASE_URL}/users/mypage`,
       // '/data/userData.json',
       {
         method: 'GET',
@@ -55,7 +54,7 @@ const MyPageEditing = () => {
       alert('먼지보다 가벼우시군요!😱 정확한 키와 몸무게를 입력해주세요!');
       return;
     }
-    fetch(`${apiUrl}/users/mypage/update`, {
+    fetch(`${API_BASE_URL}/users/mypage/update`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
