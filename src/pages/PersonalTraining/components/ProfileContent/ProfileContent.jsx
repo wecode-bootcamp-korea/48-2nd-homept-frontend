@@ -1,6 +1,7 @@
 import PROFILE_CONTENT_TITLE from '../../../../constants/profileTitle';
+import './ProfileContent.scss';
 
-export const ProfileContent = ({ data }) => (
+const ProfileContent = ({ data }) => (
   <>
     {PROFILE_CONTENT_TITLE.map(text => (
       <>
@@ -16,3 +17,5 @@ export const ProfileContent = ({ data }) => (
     ))}
   </>
 );
+
+export default ProfileContent;

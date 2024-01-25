@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileContent from '../../../PersonalTraining/components/ProfileContent';
+import ProfileContent from '../../../PersonalTraining/components/ProfileContent/ProfileContent';
 import './ProfileContainer.scss';
 
 const ProfileContainer = ({ data }) => {
