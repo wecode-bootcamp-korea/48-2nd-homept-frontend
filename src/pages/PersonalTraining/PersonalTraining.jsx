@@ -14,6 +14,7 @@ import 'react-calendar/dist/Calendar.css';
 const PersonalTraining = () => {
   const pageEnd = useRef();
   const [membershipData, setMembershipData] = useState({});
+  const isFirstRender = useRef(true);
   const startDate = new Date(`${membershipData[0]?.startDate}`);
   //TODO refactor
   const startYearMonthDate = new Date(
@@ -89,6 +90,11 @@ const PersonalTraining = () => {
   };
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return; // Skip the first render
+    }
+
     const getData = async () => {
       const { result } = await getMyExerciseAndDiet(formattedDate);
 
