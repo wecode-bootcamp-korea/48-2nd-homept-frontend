@@ -58,7 +58,7 @@ const MenuModal = ({
           className="exitBox"
           onClick={() => {
             const deleteData = async () => {
-              await deleteChattingPost(chattingData(chattingData[0].threadId));
+              await deleteChattingPost(chattingData[0].threadId);
               navigate('/personal-training');
             };
             deleteData();
