@@ -1,4 +1,4 @@
-const INPUT_DATA = {
+const MYPAGE_INPUT_DATA = {
   nickName: {
     id: 1,
     className: 'nickname',
@@ -11,14 +11,16 @@ const INPUT_DATA = {
       key: 'height',
       infoName: '키',
       type: 'number',
+      measure: 'cm',
     },
     {
       id: 2,
       key: 'weight',
       infoName: '몸무게',
       type: 'number',
+      measure: 'kg',
     },
   ],
 };
 
-export { INPUT_DATA };
+export { MYPAGE_INPUT_DATA };

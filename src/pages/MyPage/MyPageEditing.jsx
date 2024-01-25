@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from './components/Button/Button';
 import FormItem from './components/FormItem/FormItem';
-import { INPUT_DATA } from './inputData.js';
+import { MYPAGE_INPUT_DATA } from './inputData.js';
 import './MyPageEditing.scss';
 
 const MyPageEditing = () => {
@@ -10,8 +10,8 @@ const MyPageEditing = () => {
 
   const navigate = useNavigate();
 
-  const physicalInfoData = INPUT_DATA.physicalInfo;
-  const nickNameInfoData = INPUT_DATA.nickName;
+  const physicalInfoData = MYPAGE_INPUT_DATA.physicalInfo;
+  const nickNameInfoData = MYPAGE_INPUT_DATA.nickName;
 
   const [userInfo, setUserInfo] = useState(null);
   const [formData, setFormData] = useState(null);
@@ -99,16 +99,16 @@ const MyPageEditing = () => {
         </div>
 
         <div className="formList">
-          {physicalInfoData.map(data => {
+          {physicalInfoData.map(({ id, className, infoName, type, key }) => {
             return (
               <FormItem
-                key={data.id}
-                className={data.className}
-                infoName={data.infoName}
-                type={data.type}
-                name={data.key}
-                value={formData[data.key]}
-                defaultValue={userInfo[data.key]}
+                key={id}
+                className={className}
+                infoName={infoName}
+                type={type}
+                name={key}
+                value={formData[key]}
+                defaultValue={userInfo[key]}
                 handleInputChange={handleInputChange}
               />
             );

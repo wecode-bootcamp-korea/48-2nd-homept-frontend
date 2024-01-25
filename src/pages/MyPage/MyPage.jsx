@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from './components/Button/Button';
 import Info from './components/Info/Info';
-import { INPUT_DATA } from './inputData.js';
+import { MYPAGE_INPUT_DATA } from './inputData.js';
 import './MyPage.scss';
 
 const MyPage = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
-  const physicalInfoData = INPUT_DATA.physicalInfo;
+  const physicalInfoData = MYPAGE_INPUT_DATA.physicalInfo;
   const [userInfo, setUserInfo] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -31,12 +32,22 @@ const MyPage = () => {
       .then(res => res.json())
       .then(result => {
         setUserInfo(result.myPageData);
+        setLoading(false);
       });
   };
 
   useEffect(() => {
+    if (!localStorage.getItem('authorization')) {
+      alert('로그인을 먼저 해주세요!');
+      navigate('/sign-in');
+      return;
+    }
     getUserInfo();
   }, []);
+
+  if (loading) {
+    return <div />;
+  }
 
   return (
     <div className="myPageContainer">
@@ -47,18 +58,9 @@ const MyPage = () => {
         </div>
 
         <div className="infoList">
-          <Info
-            className={physicalInfoData[0].className}
-            infoName={physicalInfoData[0].infoName}
-            userdata={userInfo.height}
-            measure="cm"
-          />
-          <Info
-            className={physicalInfoData[1].className}
-            infoName={physicalInfoData[1].infoName}
-            userdata={userInfo.weight}
-            measure="kg"
-          />
+          {physicalInfoData.map(infoItem => (
+            <Info key={infoItem.id} infoItem={infoItem} userInfo={userInfo} />
+          ))}
         </div>
       </div>
       <Button
